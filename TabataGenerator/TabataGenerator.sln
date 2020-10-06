@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabataGenerator", "TabataGenerator\TabataGenerator.csproj", "{348F86AD-3D46-4F3E-A9CC-7263E2908FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TabataGeneratorTests", "TabataGeneratorTests\TabataGeneratorTests.csproj", "{F5CEFC2E-4793-4BA8-83E2-CE315579067D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{3B98DC79-7354-47DF-86DB-81B01E192BB8}"
+ProjectSection(SolutionItems) = preProject
+	..\exercises.yml = ..\exercises.yml
+EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{348F86AD-3D46-4F3E-A9CC-7263E2908FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{348F86AD-3D46-4F3E-A9CC-7263E2908FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{348F86AD-3D46-4F3E-A9CC-7263E2908FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{348F86AD-3D46-4F3E-A9CC-7263E2908FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5CEFC2E-4793-4BA8-83E2-CE315579067D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5CEFC2E-4793-4BA8-83E2-CE315579067D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5CEFC2E-4793-4BA8-83E2-CE315579067D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5CEFC2E-4793-4BA8-83E2-CE315579067D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

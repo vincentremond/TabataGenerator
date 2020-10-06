@@ -1,0 +1,84 @@
+- Id: 999
+  Label: Gainage
+  Warmup: 30s
+  Work: 1m
+  Rest: 45s
+  CoolDown: 2m
+  Exercises:
+    - Front
+    - Left
+    - Right
+    - Front
+
+- Id: 101
+  Label: 101 - Poids du corps 1 (new)
+  WarmupCycles: 1
+  Cycles: 4
+  Work: 15s
+  Rest: 5s
+  Recovery: 45s
+  CoolDown: 7m30s
+  Exercises:
+    - Squat foot touch
+    - Montée de genou
+    - Pompes en T
+    - Burpees
+
+# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-39
+- Id: 102
+  Label: 102 - Poids du corps 2 (new)
+  WarmupCycles: 1
+  Cycles: 4
+  Work: 15s
+  Rest: 5s
+  Recovery: 45s
+  CoolDown: 7m30s
+  Exercises:
+    - Chassés touch
+    - Fente en planche
+    - Jumping jack
+    - 3 relevés de bassin unilatéral en planche inversée
+    - Moutain climbers
+
+# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-40
+- Id: 103
+  Label: 103 - Poids du corps 3 (new)
+  WarmupCycles: 1
+  Cycles: 4
+  Work: 15s
+  Rest: 5s
+  Recovery: 45s
+  CoolDown: 7m30s
+  Exercises:
+    - Marche de l'ours
+    - Squat sautés
+    - Pompe + Superman
+    - Grimper échelle
+    - Burpees saut latéral
+
+# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
+- Id: 104
+  Label: 104 - TRX (new)
+  WarmupCycles: 1
+  Cycles: 4
+  Work: 15s
+  Rest: 5s
+  Recovery: 45s
+  CoolDown: 7m30s
+  Exercises:
+    - Squat Jump
+    - Oblique en travers
+    - Planche dynamique
+    - Oblique en travers
+    - Tirage inversée
+
+# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
+- Id: 105
+  Label: 105 - Elliptique (new)
+  Warmup: 7m30s
+  Cycles: 16
+  Work: 20s
+  Recovery: 40s
+  CoolDown: 5m
+  Exercises:
+    - Plein effort
