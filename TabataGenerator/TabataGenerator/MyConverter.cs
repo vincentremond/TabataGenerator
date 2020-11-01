@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using TabataGenerator.OutputFormat;
 
 namespace TabataGenerator
@@ -18,7 +19,13 @@ namespace TabataGenerator
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(JsonConvert.SerializeObject(value, Formatting.None));
+            var jsonSerializerSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.None,
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            };
+            var rawValue = JsonConvert.SerializeObject(value, Formatting.None, jsonSerializerSettings);
+            writer.WriteRawValue(rawValue);
         }
     }
 }

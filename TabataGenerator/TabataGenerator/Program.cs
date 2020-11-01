@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using TabataGenerator.OutputFormat;
@@ -19,10 +20,12 @@ namespace TabataGenerator
             var outputConverter = new OutputConverter();
             foreach (var workout in workouts)
             {
+                Console.WriteLine(workout.Label);
                 var result = outputConverter.BuildResult(workout);
                 var serializedObject = Serialize(result);
                 WriteToFile(serializedObject, workout.Label);
             }
+            Console.WriteLine("done");
         }
 
         private static void WriteToFile(string serializedObject, string workoutLabel)
