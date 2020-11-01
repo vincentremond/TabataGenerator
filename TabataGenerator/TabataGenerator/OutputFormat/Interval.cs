@@ -1,30 +1,31 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using TabataGenerator.Input;
 
 namespace TabataGenerator.OutputFormat
 {
+    [Serializable]
     public class Interval
     {
         public Interval(Duration time, IntervalType type, string description)
         {
-            this.time = time.TotalSeconds;
-            this.type = type;
-            this.description = description;
+            Time = time.TotalSeconds;
+            Type = type;
+            Description = description;
         }
 
-        public bool addSet => false;
-        public int bpm => 0;
-        public int cycle => -1;
-        public int cyclesCount => -1;
+        public bool AddSet => false;
+        public int Bpm => 0;
+        public int Cycle => -1;
+        public int CyclesCount => -1;
+        public bool IsRepsMode => false;
+        public int Reps => 0;
+        public int Tabata => -1;
+        public int TabatasCount => -1;
+        public int Time { get; }
+        public IntervalType Type { get; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string description { get; }
-
-        public bool isRepsMode => false;
-        public int reps => 0;
-        public int tabata => -1;
-        public int tabatasCount => -1;
-        public int time { get; }
-        public IntervalType type { get; }
+        public string Description { get; }
     }
 }

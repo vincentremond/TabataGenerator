@@ -1,62 +1,67 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using TabataGenerator.Input;
 
 namespace TabataGenerator.OutputFormat
 {
+    [Serializable]
     public class Workout
     {
         public Workout(int id,
             string title,
-            int intervalsSetsCount,
             Interval[] intervals,
             Duration coolDown,
             Duration work,
-            int exercisesCount,
             Duration recovery,
             Duration rest,
-            Duration warmup
-        )
+            Duration warmup,
+            string notes)
         {
-            this.id = id;
-            this.title = title;
-            this.intervals = intervals;
-            this.intervalsSetsCount = intervalsSetsCount;
-            this.coolDown = coolDown.TotalSeconds;
-            this.work = work.TotalSeconds;
-            this.rest = rest.TotalSeconds;
-            tabatasCount = exercisesCount;
-            restBetweenTabatas = recovery.TotalSeconds;
-            prepare = warmup.TotalSeconds;
+            // TODO VRM Remove properties !?
+            Id = id;
+            Title = title;
+            Intervals = intervals;
+            Notes = notes;
+
+            CoolDown = coolDown.TotalSeconds;
+            Work = work.TotalSeconds;
+            Rest = rest.TotalSeconds;
+            RestBetweenTabatas = recovery.TotalSeconds;
+            Prepare = warmup.TotalSeconds;
         }
 
-        public int colorId => 2;
-        public int coolDown { get; }
-        public int cycles => 1;
-        public bool doNotRepeatFirstPrepareAndLastCoolDown => false;
-        public int id { get; }
-        public Interval[] intervals { get; }
-        public int intervalsSetsCount { get; }
-        public bool isFavorite => false;
-        public bool isRestRepsMode => false;
-        public bool isWorkRepsMode => false;
-        public int prepare { get; }
-        public int rest { get; }
-        public int restBetweenTabatas { get; }
-        public int restBetweenWorkoutsReps => 0;
-        public bool restBetweenWorkoutsRepsMode => false;
-        public int restBetweenWorkoutsTime => 0;
-        public int restBpm => 0;
+        public int ColorId => 2;
+        public int CoolDown { get; }
+        public int Cycles => 1;
+        public bool DoNotRepeatFirstPrepareAndLastCoolDown => false;
+        public int Id { get; }
+        public Interval[] Intervals { get; }
+        public int IntervalsSetsCount => 1;
+        public bool IsFavorite => false;
+        public bool IsRestRepsMode => false;
+        public bool IsWorkRepsMode => false;
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string restDescription => null;
+        public string Notes { get; }
 
-        public int restReps => 0;
-        public bool skipLastRestInterval => true;
-        public bool skipPrepareAndCoolDownBetweenWorkouts => false;
-        public int tabatasCount { get; }
-        public string title { get; }
-        public int work { get; }
-        public int workBpm => 0;
-        public int workReps => 0;
+        public int Prepare { get; }
+        public int Rest { get; }
+        public int RestBetweenTabatas { get; }
+        public int RestBetweenWorkoutsReps => 0;
+        public bool RestBetweenWorkoutsRepsMode => false;
+        public int RestBetweenWorkoutsTime => 0;
+        public int RestBpm => 0;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string RestDescription => null;
+
+        public int RestReps => 0;
+        public bool SkipLastRestInterval => true;
+        public bool SkipPrepareAndCoolDownBetweenWorkouts => false;
+        public int TabatasCount => 1;
+        public string Title { get; }
+        public int Work { get; }
+        public int WorkBpm => 0;
+        public int WorkReps => 0;
     }
 }

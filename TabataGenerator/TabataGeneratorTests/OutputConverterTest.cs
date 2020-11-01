@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using TabataGenerator;
 using TabataGenerator.OutputFormat;
+using TabataGeneratorTests.Helpers;
 
 namespace TabataGeneratorTests
 {
@@ -9,9 +10,10 @@ namespace TabataGeneratorTests
     public class OutputConverterTest
     {
         [Test]
-        public void METHOD()
+        public void TestResultGeneration_Sample1()
         {
-            var intervals = ConvertSingle(@"
+            var intervals = ConvertSingle(
+                @"
 - Id: 101
   Label: 101 - Poids du corps 1 (new)
   Warmup: 30s
@@ -25,18 +27,71 @@ namespace TabataGeneratorTests
   - Squat foot touch
   - Montée de genou
   - Pompes en T
-  - Burpees");
+  - Burpees"
+            );
 
             // Prepare
-            Assert.AreEqual(IntervalType.Prepare, intervals.First().type);
-            Assert.AreEqual(30, intervals.First().time);
-            Assert.AreEqual(1, intervals.Count(i => i.type == IntervalType.Prepare));
-            
+            Assert.AreEqual(IntervalType.Prepare, intervals.First().Type);
+            Assert.AreEqual(30, intervals.First().Time);
+            Assert.AreEqual(1, intervals.Count(i => i.Type == IntervalType.Prepare));
+
             // Work
-            Assert.AreEqual(20, intervals.Count(i => i.type == IntervalType.Work));
-            Assert.AreEqual("Warmup [1/1·1/4]\nSquat foot touch", intervals.First(i => i.type == IntervalType.Work).description);
-            Assert.AreEqual("[4/4·4/4]\nBurpees", intervals.Last(i => i.type == IntervalType.Work).description);
-            Assert.IsTrue(intervals.Where(i => i.type == IntervalType.Work).All(i => i.time == 15));
+            Assert.AreEqual(20, intervals.Count(i => i.Type == IntervalType.Work));
+            Assert.AreEqual("Warmup\n[Ex. 1/4]\nSquat foot touch", intervals.First(i => i.Type == IntervalType.Work).Description);
+            Assert.AreEqual("\n[Cycle 4/4 · Ex. 4/4]\nBurpees", intervals.Last(i => i.Type == IntervalType.Work).Description);
+
+            //
+            Assert.IsTrue(intervals.Where(i => i.Type == IntervalType.Work).All(i => i.Time == 15));
+
+            CheckSanity(intervals);
+        }
+
+        [Test]
+        public void TestResultGeneration_Sample2()
+        {
+            var intervals = ConvertSingle(
+                @"
+- Id: 1001
+  Template: true
+  Label: HIIT
+  Warmup: 20s
+  WarmupCycles: 2
+  Cycles: 4
+  Work: 15s
+  Rest: 45s
+  CoolDown: 5m
+
+- Id: 101
+  Label: 101 - Poids du corps 1 (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
+  TemplateId: 1001
+  Exercises:
+  - Squat foot touch
+  - Montée de genou
+  - Pompes en T
+  - Burpees"
+            );
+
+            CheckSanity(intervals);
+        }
+
+        private static void CheckSanity(Interval[] intervals)
+        {
+            // Two exercises should not be together
+            var sameTypeAndNeighbourgs = intervals
+                .SelectTwoConsecutives()
+                .Where(couple => couple.Item1.Type == couple.Item2.Type)
+                .ToList();
+            Assert.IsEmpty(sameTypeAndNeighbourgs);
+            // Two exercises should not be together
+            var restShouldNotBeNextToRecovery = intervals
+                .SelectTwoConsecutives()
+                .Where(
+                    couple => (couple.Item1.Type == IntervalType.Rest && couple.Item2.Type == IntervalType.RestBetweenSets)
+                              || (couple.Item1.Type == IntervalType.RestBetweenSets && couple.Item2.Type == IntervalType.Rest)
+                )
+                .ToList();
+            Assert.IsEmpty(sameTypeAndNeighbourgs);
         }
 
         private Interval[] ConvertSingle(string input)
@@ -46,8 +101,8 @@ namespace TabataGeneratorTests
                 .Single();
             return new OutputConverter()
                 .BuildResult(workoutDescription)
-                .workout
-                .intervals;
+                .Workout
+                .Intervals;
         }
     }
 }
