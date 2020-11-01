@@ -12,16 +12,16 @@ namespace TabataGenerator
         {
             var intervals = GetIntervals(workoutDescription).ToArray();
             var result = new Result(
-                new Workout(workoutDescription.Id
-                    , workoutDescription.Label
-                    , workoutDescription.Cycles
-                    , intervals
-                    , workoutDescription.CoolDown
-                    , workoutDescription.Work
-                        , workoutDescription.Exercises.Length
-                    , workoutDescription.Recovery
-                    , workoutDescription.Rest
-                        , workoutDescription.Warmup
+                new Workout(
+                    id: workoutDescription.Id,
+                    title: workoutDescription.Label,
+                    intervals: intervals,
+                    coolDown: workoutDescription.CoolDown,
+                    work: workoutDescription.Work,
+                    recovery: workoutDescription.Recovery,
+                    rest: workoutDescription.Warmup,
+                    warmup: workoutDescription.Warmup,
+                    notes: workoutDescription.Notes
                 )
             );
             return result;
@@ -31,25 +31,79 @@ namespace TabataGenerator
         {
             var result = new List<Interval>();
             AddIfNotEmpty(result, workout.Warmup, IntervalType.Prepare, null);
-            AddCyclesAndExercises(workout, result, "Warmup ", workout.WarmupCycles, skipLastRecovery: false);
+            AddCyclesAndExercises(workout, result, "Warmup", workout.WarmupCycles, skipLastRecovery: false);
             AddCyclesAndExercises(workout, result, string.Empty, workout.Cycles, skipLastRecovery: true);
             AddIfNotEmpty(result, workout.CoolDown, IntervalType.CoolDown, null);
             return result.ToArray();
         }
 
         private void AddCyclesAndExercises(WorkoutDescription workout, List<Interval> result, string prefix, int cyclesCount, bool skipLastRecovery) =>
-            LinqHelper.ForEach(cyclesCount, (indexCycle, firstCycle, lastCycle) =>
-            {
-                LinqHelper.ForEach(workout.Exercises, (indexExercise, exercise, firstExercise, lastExercise) =>
+            LinqHelper.ForEach(
+                cyclesCount,
+                (indexCycle, firstCycle, lastCycle) =>
                 {
-                    AddIfNotEmpty(enabled: !firstExercise, result, workout.Rest, IntervalType.Rest,
-                        $"{prefix}[{indexCycle + 1}/{cyclesCount}·{indexExercise + 1}/{workout.Exercises.Length}] (next)\n{exercise}");
-                    AddExercise(result, workout.Work,
-                        $"{prefix}[{indexCycle + 1}/{cyclesCount}·{indexExercise + 1}/{workout.Exercises.Length}]\n{exercise}");
-                });
-                var shouldLastRecoveryBeSkipped = skipLastRecovery && lastCycle;
-                AddIfNotEmpty(enabled: !shouldLastRecoveryBeSkipped, result, workout.Recovery, IntervalType.RestBetweenSets, null);
-            });
+                    LinqHelper.ForEach(
+                        workout.Exercises,
+                        (indexExercise, exercise, firstExercise, lastExercise) =>
+                        {
+                            AddExercise(
+                                result,
+                                workout.Work,
+                                GetLabel(
+                                    prefix,
+                                    cyclesCount,
+                                    indexCycle,
+                                    indexExercise,
+                                    exercise,
+                                    workout.Exercises.Length
+                                )
+                            );
+
+                            var noRecoveryBetweenCycles = workout.Recovery.IsEmpty;
+                            var shouldRest = !lastExercise || noRecoveryBetweenCycles;
+
+                            AddIfNotEmpty(
+                                enabled: shouldRest,
+                                result,
+                                workout.Rest,
+                                IntervalType.Rest,
+                                description: null
+                            );
+                        }
+                    );
+                    var isLastRecoveryAndShouldBeSkipped = skipLastRecovery && lastCycle;
+
+                    AddIfNotEmpty(enabled: !isLastRecoveryAndShouldBeSkipped, result, workout.Recovery, IntervalType.RestBetweenSets, null);
+                }
+            );
+
+        private static string GetLabel(string prefix, int cyclesCount, int indexCycle, int indexExercise, string exercise, int exercisesCount)
+        {
+            IEnumerable<string> GetParts()
+            {
+                if (prefix != null)
+                {
+                    yield return prefix;
+                }
+
+                yield return "\n";
+                yield return "[";
+
+                if (cyclesCount > 1)
+                {
+                    yield return $"Cycle {indexCycle + 1}/{cyclesCount} · ";
+                }
+
+                yield return $"Ex. {indexExercise + 1}/{exercisesCount}";
+
+                yield return "]";
+
+                yield return "\n";
+                yield return exercise;
+            }
+
+            return GetParts().Concat();
+        }
 
         private void AddExercise(List<Interval> result, Duration duration, string description)
         {

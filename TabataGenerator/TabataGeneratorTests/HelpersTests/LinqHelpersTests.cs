@@ -54,5 +54,23 @@ namespace TabataGeneratorTests.Helpers
 
             CollectionAssert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void SelectTwoTest1()
+        {
+            var input = new[] {1, 2, 3, 4};
+            var expected = new[] {(1, 2), (2, 3), (3, 4)};
+            var result = input.SelectTwoConsecutives();
+            CollectionAssert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void SelectTwoTest2()
+        {
+            var input = new[] {1};
+            var expected = Enumerable.Empty<(int, int)>();
+            var result = input.SelectTwoConsecutives();
+            CollectionAssert.AreEqual(expected, result);
+        }
     }
 }

@@ -26,16 +26,20 @@ namespace TabataGeneratorTests
   - Pompes en T
   - Burpees", new[]
             {
-                new WorkoutDescription(101,
-                    "101 - Poids du corps 1 (new)",
+                new WorkoutDescription(
+                    id: 101,
+                    template: false,
+                    templateId: 0,
+                    label: "101 - Poids du corps 1 (new)",
+                    notes: null,
                     warmup: new Duration(0, 30),
-                    1,
+                    warmupCycles: 1,
                     cycles: 4,
                     work: new Duration(0, 15),
                     rest: new Duration(0, 5),
                     recovery: new Duration(0, 45),
                     coolDown: new Duration(7, 30),
-                    new[]
+                    exercises: new[]
                     {
                         "Squat foot touch",
                         "Montée de genou",
@@ -51,18 +55,24 @@ namespace TabataGeneratorTests
         {
             Test(@"
 - Label: 101 - Poids du corps 1 (new)
+  Work: 30s
+  Rest: 30s
 ", new[]
             {
-                new WorkoutDescription(0,
-                    "101 - Poids du corps 1 (new)",
+                new WorkoutDescription(
+                    id: 0,
+                    template: false,
+                    templateId: 0,
+                    label: "101 - Poids du corps 1 (new)",
+                    notes: null,
                     warmup: Duration.Empty,
-                    0,
+                    warmupCycles: 0,
                     cycles: 1,
                     work: Duration.FromSeconds(30),
                     rest: Duration.FromSeconds(30),
                     recovery: Duration.Empty,
                     coolDown: Duration.Empty,
-                    new[]
+                    exercises: new[]
                     {
                         "(no label)",
                     }

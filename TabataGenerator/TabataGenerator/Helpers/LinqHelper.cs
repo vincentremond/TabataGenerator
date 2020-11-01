@@ -33,7 +33,7 @@ namespace TabataGenerator.Helpers
                 action(i, first, last);
             }
         }
-        
+
         public static void ForEach<T>(T[] items, Action<int, T, bool, bool> action)
         {
             for (var index = 0; index < items.Length; index++)
@@ -44,5 +44,9 @@ namespace TabataGenerator.Helpers
                 action(index, item, first, last);
             }
         }
+
+        public static string Concat(this IEnumerable<string> enumerable)
+            => string.Concat(enumerable);
+
     }
 }

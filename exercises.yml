@@ -5,80 +5,348 @@
   Rest: 45s
   CoolDown: 2m
   Exercises:
-    - Front
-    - Left
-    - Right
-    - Front
+  - Front
+  - Left
+  - Right
+  - Front
 
-- Id: 101
-  Label: 101 - Poids du corps 1 (new)
-  WarmupCycles: 1
-  Cycles: 4
-  Work: 15s
-  Rest: 5s
-  Recovery: 45s
-  CoolDown: 7m30s
-  Exercises:
-    - Squat foot touch
-    - Montée de genou
-    - Pompes en T
-    - Burpees
-
-# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-39
-- Id: 102
-  Label: 102 - Poids du corps 2 (new)
-  WarmupCycles: 1
-  Cycles: 4
-  Work: 15s
-  Rest: 5s
-  Recovery: 45s
-  CoolDown: 7m30s
-  Exercises:
-    - Chassés touch
-    - Fente en planche
-    - Jumping jack
-    - 3 relevés de bassin unilatéral en planche inversée
-    - Moutain climbers
-
-# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-40
-- Id: 103
-  Label: 103 - Poids du corps 3 (new)
-  WarmupCycles: 1
-  Cycles: 4
-  Work: 15s
-  Rest: 5s
-  Recovery: 45s
-  CoolDown: 7m30s
-  Exercises:
-    - Marche de l'ours
-    - Squat sautés
-    - Pompe + Superman
-    - Grimper échelle
-    - Burpees saut latéral
-
-# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
-- Id: 104
-  Label: 104 - TRX (new)
-  WarmupCycles: 1
-  Cycles: 4
-  Work: 15s
-  Rest: 5s
-  Recovery: 45s
-  CoolDown: 7m30s
-  Exercises:
-    - Squat Jump
-    - Oblique en travers
-    - Planche dynamique
-    - Oblique en travers
-    - Tirage inversée
-
-# https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
-- Id: 105
-  Label: 105 - Elliptique (new)
+# Template HIIT Machine (work, rest, work, rest, recovery)
+- Id: 1000
+  Template: true
+  Label: HIIT Machine
   Warmup: 7m30s
   Cycles: 16
   Work: 20s
+  Rest: 10s
   Recovery: 40s
   CoolDown: 5m
+
+# Template HIIT avec repos 30/30
+- Id: 1001
+  Template: true
+  Label: HIIT
+  Warmup: 20s
+  WarmupCycles: 2
+  Cycles: 4
+  Work: 22s
+  Rest: 38s
+  CoolDown: 5m
+
+# Template HIIT enchainé sans pause
+- Id: 1002
+  Template: true
+  Label: HIIT
+  Warmup: 20s
+  WarmupCycles: 2
+  Cycles: 4
+  Work: 30s
+  Rest: 5s
+  Recovery: 1m15s
+  CoolDown: 5m
+
+- Id: 101
+  Label: 101 - Poids du corps 1 (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
+  TemplateId: 1001
   Exercises:
-    - Plein effort
+  - Squat foot touch
+  - Montée de genou
+  - Pompes en T
+  - Burpees
+
+- Id: 102
+  Label: 102 - Poids du corps 2 (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-39
+  TemplateId: 1001
+  Exercises:
+  - Chassés touch
+  - Fente en planche
+  - Jumping jack
+  - 3 relevés de bassin unilatéral en planche inversée
+  - Moutain climbers
+
+- Id: 103
+  Label: 103 - Poids du corps 3 (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-40
+  TemplateId: 1001
+  Exercises:
+  - Marche de l'ours
+  - Squat sautés
+  - Pompe + Superman
+  - Grimper échelle
+  - Burpees saut latéral
+
+- Id: 104
+  Label: 104 - TRX (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
+  TemplateId: 1001
+  Exercises:
+  - Squat Jump
+  - Oblique en travers
+  - Planche dynamique
+  - Oblique en travers
+  - Tirage inversée
+
+- Id: 105
+  Label: 105 - Elliptique (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-42
+  TemplateId: 1000
+  Exercises:
+  - Plein effort
+
+- Id: 106
+  Label: 106 - Tapis de course (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-41
+  TemplateId: 1000
+  Exercises:
+  - Plein effort
+
+- Id: 107
+  Label: 107 - Poids du corps 4 (new)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-41
+    Skater: comme du patin à glace de gauche à droite en descendant le dos (gardé
+    Bear plank: sur la pointe des pieds et sur les mains on crapahute d'en avant en arrière en totale contraction à 90 degrès
+    Step up: départ en fente pour aller donner un coup de genoux en "explosant le plus haut possible"
+    Break dancer: regroupé, presque à genoux, poser chaque fesse en alternance, et aller mettre la main à l'oreille
+  TemplateId: 1001
+  Exercises:
+  - Skater
+  - Bear plank
+  - Step up (droit)
+  - Break dancer
+  - Step up (gauche)
+
+- Id: 108
+  Label: 108 - Vélo (new)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-48
+  TemplateId: 1000
+  Exercises:
+  - Plein effort
+
+- Id: 109
+  Label: 109 - Sac de frappe
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-34
+  TemplateId: 1001
+  Exercises:
+  - 2 directs, 2 crochets, 1 burpees
+  - 2 directs, 1 sit-up
+  - 6 touches, course arrière
+  - Jambes libre
+  - Bras libre
+
+- Id: 201
+  Label: 201 - Haltères
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-47
+  TemplateId: 1002
+  Exercises:
+  - Biceps Curl
+  - Triceps extension
+  - Snatch haltère
+  - Thruster
+  - Fentes haltères
+
+- Id: 202
+  Label: 202 - Haltères
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-46
+  TemplateId: 1002
+  Exercises:
+  - Epaulé développé
+  - Squat
+  - Développé couché
+  - Rowing
+
+- Id: 203
+  Label: 203 - Haut du corps
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-50
+  TemplateId: 1002
+  Exercises:
+  - Pompes + mains surélevées
+  - Abdominaux relevé de bassin
+  - Dips
+  - Superman
+  - Planche commando
+  - Tractions
+
+- Id: 204
+  Label: 204 - Bas du corps
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-51
+  TemplateId: 1002
+  Exercises:
+  - Montée sur banc (droit)
+  - Montée sur banc (gauche)
+  - Hip Thrust pied sur banc
+  - Fente bulgare (droit)
+  - Fente bulgare (gauche)
+  - Squat double rebond
+
+- Id: 205
+  Label: 205 - Élastique
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-52
+  TemplateId: 1002
+  Exercises:
+  - Thruster
+  - Tirage
+  - Biceps curl
+  - Triceps extension
+  - Squat en déplacement
+  - Hip
+
+- Id: 206
+  Label: 206 - Abdominaux
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-53
+  TemplateId: 1002
+  Exercises:
+  - Elévations alternées
+  - Relevé de bassin
+  - Flutter kick
+  - Ciseaux bas
+  - Planche inversée
+  - Hollow groupé + tendu
+  - Obliques touch alternés
+  - Roulette ou planche
+
+- Id: 207
+  Label: 207 - Kettlebell
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-35
+  TemplateId: 1002
+  Exercises:
+  - Epaulé développé droit
+  - Abdominaux KB tendu devant soi
+  - Epaulé développé gauche
+  - Swing
+  - Fentes alternées
+
+- Id: 301
+  Label: 301 - Elliptique burpees
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-21
+  TemplateId: 1000
+  Exercises:
+  - Sprint elliptique
+  - 5 burpees
+
+- Id: 302
+  Label: 302 - Tapis kettlebell swing
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-32
+  TemplateId: 1000
+  Work: 10s
+  Recovery: 40s
+  Exercises:
+  - Sprint tapis
+  - 10 swings kettlebell
+
+- Id: 303
+  Label: 303 - Outdoor 1
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-24
+    Squat: toucher en alterné le sol
+    Pompes sur le banc: pompe en avec les bras sur le haut du banc, en haut tendre (en alternance) bras gauche/pied droit ou inversement
+    Montées de jenoux: toucher le bord de banc en alternant le pied et en se décalant de gauche à droite
+    Abdos bord du banc : venir en fermeture sans toucher le dossier en se tenant sur le bord du banc
+  TemplateId: 1002
+  Exercises:
+  - Squat touché le sol alterné
+  - Pompes sur le banc
+  - Montées de jenoux
+  - Abdos bord du banc
+
+- Id: 304
+  Label: 304 - Fentes burpees haltères
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-23
+    Fentes sautées: en alternance gauche droite
+    Haltères: monter et descendre les haltères et planche en bas
+  TemplateId: 1000
+  Exercises:
+  - Fentes sautées
+  - Haltères
+
+- Id: 305
+  Label: 305 - Outdoor 2
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-25
+    Pompes: pompes avec les jambes en l'air
+    Sprint: A/R de 100m avec les genoux bien levés
+    Squats jumps: partir en fente (G/D) pour sauter sur 2 marche (atterissage 2 pieds)
+  TemplateId: 1002
+  Cycles: 6
+  Exercises:
+  - 10 pompes
+  - 100m sprint A/R
+  - 10 squats jumps
+
+- Id: 306
+  Label: 306 - Swiss ball
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-26
+
+    - Roulé: en parant sur les genoux, faire rouler les avants bras sur la ball
+    - Crunch: Dos sur la ball, faire des crunch pour bien serrer les abdos
+    - Lombaires: poser le ventre sur la ball en contractant le bas du dos
+    - Jambes: Sur les bras tendus, jambes sur la ball, on fait rouler la ball pour se ressérer
+    - Obliques: flanc sur la ball, on contracte sur le côté
+  TemplateId: 1002
+  Cycles: 6
+  Exercises:
+  - Roulé sur la ball
+  - Crunch
+  - Lombaires
+  - Jambes
+  - Obliques
+
+- Id: 307
+  Label: 307 - Machines
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-27
+
+    En contraction constante sans rien « claquer »
+  TemplateId: 1002
+  Cycles: 6
+  Exercises:
+  - 10 Presse
+  - 10 Tire dos
+  - 10 pousse pectoraux
+  - 10 flexion des genoux
+  - 10 compression abdominaux
+
+- Id: 308
+  Label: 308 - Poids du corps
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-30
+
+    - Pompes claquées: mains écartée puis ressérées
+    - Pas chassés: dos droits aller toucher entre les jambes avec chaque main en alternance
+    - Descente de bras: bras à l'arrière posés sur une chaise ou un banc et on descends
+    - Montée de genoux: plaquer le ventre en « grimpant à la corder » avec les mains
+  TemplateId: 1002
+  Exercises:
+  - 20 pompes claquées
+  - 20 pas chassés
+  - 20 descente de bras
+  - 20 montée de genoux
+
+- Id: 309
+  Label: 309 - Spécial été
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-37
+
+    Biceps élastique ou haltères ou traction supination
+  TemplateId: 1002
+  Exercises:
+  - Fentes sautées
+  - Gainage chien tête en bas
+  - Burpees 5 climbers
+  - Biceps élastique
+  - Gainage dynamique écart
+  - Montée de genoux

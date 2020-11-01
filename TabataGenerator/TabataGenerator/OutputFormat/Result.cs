@@ -7,16 +7,16 @@ namespace TabataGenerator.OutputFormat
     {
         public Result(Workout workout)
         {
-            this.workout = workout;
+            this.Workout = workout;
         }
         
-        public Workout workout { get; }
+        public Workout Workout { get; }
         
-        public int fileVersion => 1;
-        public string packageName => "com.evgeniysharafan.tabatatimer";
-        public int platform => 1;
-        public int type => 1;
-        public int versionCode => 502002;
-        public string versionName => "5.2.2";
+        public int FileVersion => 1;
+        public string PackageName => "com.evgeniysharafan.tabatatimer";
+        public int Platform => 1;
+        public int Type => 1;
+        public int VersionCode => 502002;
+        public string VersionName => "5.2.2";
     }
 }

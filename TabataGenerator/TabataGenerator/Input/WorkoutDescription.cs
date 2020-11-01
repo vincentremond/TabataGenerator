@@ -6,7 +6,10 @@ namespace TabataGenerator.Input
     public class WorkoutDescription
     {
         public int Id { get; set; }
+        public bool Template { get; set; }
+        public int TemplateId { get; set; }
         public string Label { get; set; }
+        public string Notes { get; set; }
         public Duration Warmup { get; set; }
         public int WarmupCycles { get; set; }
         public int Cycles { get; set; }
@@ -18,12 +21,15 @@ namespace TabataGenerator.Input
 
         public WorkoutDescription()
             : this(id: 0,
+                template: false,
+                templateId: 0,
                 label: "(no label)",
+                notes: null,
                 warmup: Duration.Empty,
                 warmupCycles: 0,
                 cycles: 1,
-                work: Duration.FromSeconds(30),
-                rest: Duration.FromSeconds(30),
+                work: Duration.Empty,
+                rest: Duration.Empty,
                 recovery: Duration.Empty,
                 coolDown: Duration.Empty,
                 exercises: new[]
@@ -36,7 +42,10 @@ namespace TabataGenerator.Input
 
         public WorkoutDescription(
             int id,
+            bool template,
+            int templateId,
             string label,
+            string notes,
             Duration warmup,
             int warmupCycles,
             int cycles,
@@ -47,7 +56,10 @@ namespace TabataGenerator.Input
             string[] exercises)
         {
             Id = id;
+            Template = template;
+            TemplateId = templateId;
             Label = label;
+            Notes = notes;
             Warmup = warmup;
             WarmupCycles = warmupCycles;
             Cycles = cycles;
