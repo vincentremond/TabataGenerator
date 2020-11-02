@@ -43,7 +43,7 @@ namespace TabataGeneratorTests
             //
             Assert.IsTrue(intervals.Where(i => i.Type == IntervalType.Work).All(i => i.Time == 15));
 
-            CheckSanity(intervals);
+            SanityCheck(intervals);
         }
 
         [Test]
@@ -72,10 +72,10 @@ namespace TabataGeneratorTests
   - Burpees"
             );
 
-            CheckSanity(intervals);
+            SanityCheck(intervals);
         }
 
-        private static void CheckSanity(Interval[] intervals)
+        private static void SanityCheck(Interval[] intervals)
         {
             // Two exercises should not be together
             var sameTypeAndNeighbourgs = intervals
@@ -86,12 +86,15 @@ namespace TabataGeneratorTests
             // Two exercises should not be together
             var restShouldNotBeNextToRecovery = intervals
                 .SelectTwoConsecutives()
-                .Where(
-                    couple => (couple.Item1.Type == IntervalType.Rest && couple.Item2.Type == IntervalType.RestBetweenSets)
-                              || (couple.Item1.Type == IntervalType.RestBetweenSets && couple.Item2.Type == IntervalType.Rest)
-                )
+                .Where(ConsecutiveRests)
                 .ToList();
-            Assert.IsEmpty(sameTypeAndNeighbourgs);
+            Assert.IsEmpty(restShouldNotBeNextToRecovery, "There should not be a two consecutive rests");
+        }
+
+        private static bool ConsecutiveRests((Interval, Interval) couple)
+        {
+            bool IsRest(IntervalType t) => t != IntervalType.Work;
+            return IsRest(couple.Item1.Type) && IsRest(couple.Item2.Type);
         }
 
         private Interval[] ConvertSingle(string input)

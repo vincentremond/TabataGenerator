@@ -42,6 +42,8 @@ namespace TabataGenerator
                 cyclesCount,
                 (indexCycle, firstCycle, lastCycle) =>
                 {
+                    var isLastRecoveryAndShouldBeSkipped = skipLastRecovery && lastCycle;
+
                     LinqHelper.ForEach(
                         workout.Exercises,
                         (indexExercise, exercise, firstExercise, lastExercise) =>
@@ -59,8 +61,8 @@ namespace TabataGenerator
                                 )
                             );
 
-                            var noRecoveryBetweenCycles = workout.Recovery.IsEmpty;
-                            var shouldRest = !lastExercise || noRecoveryBetweenCycles;
+                            var shouldReplaceRecovery = workout.Recovery.IsEmpty && !isLastRecoveryAndShouldBeSkipped;
+                            var shouldRest = !lastExercise || shouldReplaceRecovery;
 
                             AddIfNotEmpty(
                                 enabled: shouldRest,
@@ -71,9 +73,8 @@ namespace TabataGenerator
                             );
                         }
                     );
-                    var isLastRecoveryAndShouldBeSkipped = skipLastRecovery && lastCycle;
 
-                    AddIfNotEmpty(enabled: !isLastRecoveryAndShouldBeSkipped, result, workout.Recovery, IntervalType.RestBetweenSets, null);
+                    AddIfNotEmpty(enabled: !isLastRecoveryAndShouldBeSkipped, result, workout.Recovery, IntervalType.Recovery, null);
                 }
             );
 
