@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using TabataGenerator.OutputFormat;
@@ -8,29 +9,59 @@ namespace TabataGenerator
 {
     class Program
     {
-        // TODO VRM add config ?!
-        private const string ExercicesFile = @"D:\GoogleDrive\GitRepositories\TabataGenerator\exercises.yml";
-        private const string ResultDirectory = @"D:\GoogleDrive\GitRepositories\TabataGenerator\results\";
+        private const string ExercicesFile = @"exercises.yml";
 
         static void Main()
         {
-            var contents = File.ReadAllText(ExercicesFile);
-            var workouts = new WorkoutReader().Read(contents);
+            var configFile = GetConfigFilePathInfo();
+            var resultDirectory = GetResultDirectoryPath(configFile);
+            var configContent = File.ReadAllText(configFile.FullName);
+            var workouts = new WorkoutReader().Read(configContent);
 
             var outputConverter = new OutputConverter();
             foreach (var workout in workouts)
             {
-                Console.WriteLine(workout.Label);
                 var result = outputConverter.BuildResult(workout);
                 var serializedObject = Serialize(result);
-                WriteToFile(serializedObject, workout.Label);
+                Console.WriteLine(result.Workout.Title);
+                WriteToFile(serializedObject, result.Workout.Title, resultDirectory);
             }
+
             Console.WriteLine("done");
         }
 
-        private static void WriteToFile(string serializedObject, string workoutLabel)
+        private static string GetResultDirectoryPath(FileInfo configFile)
         {
-            var outputPath = Path.Combine(ResultDirectory, $"{workoutLabel}.workout");
+            var resultDirectory = Path.Combine(configFile.Directory.FullName, "Results");
+            if (!Directory.Exists(resultDirectory))
+            {
+                Directory.CreateDirectory(resultDirectory);
+            }
+
+            return resultDirectory;
+        }
+
+        private static FileInfo GetConfigFilePathInfo()
+        {
+            var currentDirectory = Environment.CurrentDirectory;
+            var fi = new DirectoryInfo(currentDirectory);
+            while (fi != null)
+            {
+                var file = fi.GetFiles(ExercicesFile, SearchOption.TopDirectoryOnly).SingleOrDefault();
+                if (file != null)
+                {
+                    return file;
+                }
+
+                fi = fi.Parent;
+            }
+
+            throw new Exception($"Config file {ExercicesFile} not found.");
+        }
+
+        private static void WriteToFile(string serializedObject, string workoutLabel, string resultDirectory)
+        {
+            var outputPath = Path.Combine(resultDirectory, $"{workoutLabel}.workout");
             File.WriteAllText(outputPath, serializedObject);
         }
 

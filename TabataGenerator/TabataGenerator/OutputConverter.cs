@@ -14,7 +14,7 @@ namespace TabataGenerator
             var result = new Result(
                 new Workout(
                     id: workoutDescription.Id,
-                    title: workoutDescription.Label,
+                    title: $"{workoutDescription.Id} - {workoutDescription.Label}",
                     intervals: intervals,
                     coolDown: workoutDescription.CoolDown,
                     work: workoutDescription.Work,

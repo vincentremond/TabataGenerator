@@ -1,33 +1,6 @@
 # TabataGenerator
 
+Generates `.workout` files from a `.yaml` config file.
 
-
-## Order
-
-- Warmup
-- WarmupCycles
-  - Exercice 1
-    - Work
-    - Rest
-  - Exercice 2
-    - Work
-  - RestBetweenCycles
-  - Exercice 1
-    - Work
-    - Rest
-  - Exercice 2
-    - Work
-  - RestBetweenCycles
-- Cycles
-  - Exercice 1
-    - Work
-    - Rest
-  - Exercice 2
-    - Work
-  - RestBetweenCycles
-  - Exercice 1
-    - Work
-    - Rest
-  - Exercice 2
-    - Work
-- CoolDown
+Generated files can be used by a [Tabata Timer](https://play.google.com/store/apps/details?id=com.evgeniysharafan.tabatatimer) android app.
+ 
