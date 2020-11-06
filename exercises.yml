@@ -45,7 +45,7 @@
   CoolDown: 5m
 
 - Id: 101
-  Label: 101 - Poids du corps 1 (new)
+  Label: Poids du corps 1 (new)
   Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
   TemplateId: 1001
   Exercises:
@@ -55,7 +55,7 @@
   - Burpees
 
 - Id: 102
-  Label: 102 - Poids du corps 2 (new)
+  Label: Poids du corps 2 (new)
   Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-39
   TemplateId: 1001
   Exercises:
@@ -66,7 +66,7 @@
   - Moutain climbers
 
 - Id: 103
-  Label: 103 - Poids du corps 3 (new)
+  Label: Poids du corps 3 (new)
   Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-40
   TemplateId: 1001
   Exercises:
@@ -77,32 +77,7 @@
   - Burpees saut latéral
 
 - Id: 104
-  Label: 104 - TRX (new)
-  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
-  TemplateId: 1001
-  Exercises:
-  - Squat Jump
-  - Oblique en travers
-  - Planche dynamique
-  - Oblique en travers
-  - Tirage inversée
-
-- Id: 105
-  Label: 105 - Elliptique (new)
-  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-42
-  TemplateId: 1000
-  Exercises:
-  - Plein effort
-
-- Id: 106
-  Label: 106 - Tapis de course (new)
-  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-41
-  TemplateId: 1000
-  Exercises:
-  - Plein effort
-
-- Id: 107
-  Label: 107 - Poids du corps 4 (new)
+  Label: Poids du corps 4 (new)
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-41
     Skater: comme du patin à glace de gauche à droite en descendant le dos (gardé
@@ -117,8 +92,33 @@
   - Break dancer
   - Step up (gauche)
 
+- Id: 105
+  Label: Elliptique (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-42
+  TemplateId: 1000
+  Exercises:
+  - Plein effort
+
+- Id: 106
+  Label: Tapis de course (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-41
+  TemplateId: 1000
+  Exercises:
+  - Plein effort
+
+- Id: 107
+  Label: TRX (new)
+  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-43
+  TemplateId: 1001
+  Exercises:
+  - Squat Jump
+  - Oblique en travers
+  - Planche dynamique
+  - Oblique en travers
+  - Tirage inversée
+
 - Id: 108
-  Label: 108 - Vélo (new)
+  Label: Vélo (new)
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-48
   TemplateId: 1000
@@ -126,7 +126,7 @@
   - Plein effort
 
 - Id: 109
-  Label: 109 - Sac de frappe
+  Label: Sac de frappe
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-34
   TemplateId: 1001
@@ -137,8 +137,54 @@
   - Jambes libre
   - Bras libre
 
+- Id: 111
+  Label: Poids du corps 1 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-9
+  TemplateId: 1001
+  Exercises:
+  - Kick fit fight
+  - Squat groupé
+  - Moutain climbers croisés
+  - Fentes sautées
+
+- Id: 112
+  Label: Poids du corps 2 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12
+  TemplateId: 1001
+  Exercises:
+  - Jumping jack
+  - Montées de genou
+  - Squats sautés
+  - Mountain climbers
+
+- Id: 113
+  Label: Poids du corps 3 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-7
+  TemplateId: 1001
+  Exercises:
+  - Burpees simplifiés
+  - Montées de genou
+  - Pompes en T G·D
+  - Mountain climbers
+
+- Id: 114
+  Label: Poids du corps 4 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-7
+    Pompes touch épaule
+  TemplateId: 1001
+  Exercises:
+  - Burpees ↕ Squat (simpl.)
+  - Jump roller · ↔ ·
+  - Pompes touch épaule ↸
+  - Jump skater G
+  - Jump skater D
+
 - Id: 201
-  Label: 201 - Haltères
+  Label: Haltères
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-47
   TemplateId: 1002
@@ -150,7 +196,7 @@
   - Fentes haltères
 
 - Id: 202
-  Label: 202 - Haltères
+  Label: Haltères
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-46
   TemplateId: 1002
@@ -161,7 +207,7 @@
   - Rowing
 
 - Id: 203
-  Label: 203 - Haut du corps
+  Label: Haut du corps
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-50
   TemplateId: 1002
@@ -174,7 +220,7 @@
   - Tractions
 
 - Id: 204
-  Label: 204 - Bas du corps
+  Label: Bas du corps
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-51
   TemplateId: 1002
@@ -187,7 +233,7 @@
   - Squat double rebond
 
 - Id: 205
-  Label: 205 - Élastique
+  Label: Élastique
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-52
   TemplateId: 1002
@@ -200,7 +246,7 @@
   - Hip
 
 - Id: 206
-  Label: 206 - Abdominaux
+  Label: Abdominaux
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-53
   TemplateId: 1002
@@ -215,7 +261,7 @@
   - Roulette ou planche
 
 - Id: 207
-  Label: 207 - Kettlebell
+  Label: Kettlebell
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-2/routine-35
   TemplateId: 1002
@@ -227,7 +273,7 @@
   - Fentes alternées
 
 - Id: 301
-  Label: 301 - Elliptique burpees
+  Label: Elliptique burpees
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-21
   TemplateId: 1000
@@ -236,7 +282,7 @@
   - 5 burpees
 
 - Id: 302
-  Label: 302 - Tapis kettlebell swing
+  Label: Tapis kettlebell swing
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-32
   TemplateId: 1000
@@ -247,7 +293,7 @@
   - 10 swings kettlebell
 
 - Id: 303
-  Label: 303 - Outdoor 1
+  Label: Outdoor 1
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-24
     Squat: toucher en alterné le sol
@@ -262,7 +308,7 @@
   - Abdos bord du banc
 
 - Id: 304
-  Label: 304 - Fentes burpees haltères
+  Label: Fentes burpees haltères
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-23
     Fentes sautées: en alternance gauche droite
@@ -273,7 +319,7 @@
   - Haltères
 
 - Id: 305
-  Label: 305 - Outdoor 2
+  Label: Outdoor 2
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-25
     Pompes: pompes avec les jambes en l'air
@@ -287,7 +333,7 @@
   - 10 squats jumps
 
 - Id: 306
-  Label: 306 - Swiss ball
+  Label: Swiss ball
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-26
 
@@ -306,7 +352,7 @@
   - Obliques
 
 - Id: 307
-  Label: 307 - Machines
+  Label: Machines
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-27
 
@@ -321,7 +367,7 @@
   - 10 compression abdominaux
 
 - Id: 308
-  Label: 308 - Poids du corps
+  Label: Poids du corps
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-30
 
@@ -337,7 +383,7 @@
   - 20 montée de genoux
 
 - Id: 309
-  Label: 309 - Spécial été
+  Label: Spécial été
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-3/routine-37
 
