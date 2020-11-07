@@ -90,12 +90,12 @@ namespace TabataGenerator
                 yield return "\n";
                 yield return "[";
 
+                yield return $"Ex. {indexExercise + 1}/{exercisesCount}";
+
                 if (cyclesCount > 1)
                 {
-                    yield return $"Cycle {indexCycle + 1}/{cyclesCount} · ";
+                    yield return $" · Cycle {indexCycle + 1}/{cyclesCount}";
                 }
-
-                yield return $"Ex. {indexExercise + 1}/{exercisesCount}";
 
                 yield return "]";
 

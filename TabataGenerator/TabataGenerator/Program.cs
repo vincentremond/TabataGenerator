@@ -41,7 +41,7 @@ namespace TabataGenerator
                 Formatting = Formatting.Indented,
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
             };
-            jsonSerializerSettings.Converters.Add(new MyConverter());
+            jsonSerializerSettings.Converters.Add(new MyJsonConverter());
             var serializedObject = JsonConvert.SerializeObject(result, jsonSerializerSettings);
             return serializedObject;
         }

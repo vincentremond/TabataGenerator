@@ -5,7 +5,7 @@ using TabataGenerator.OutputFormat;
 
 namespace TabataGenerator
 {
-    internal class MyConverter : JsonConverter
+    internal class MyJsonConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
