@@ -12,7 +12,7 @@ namespace TabataGeneratorTests
         {
             Test(@"
 - Id: 101
-  Label: 101 - Poids du corps 1 (new)
+  Label: Poids du corps 1 (new)
   Warmup: 30s
   WarmupCycles: 1
   Cycles: 4
@@ -30,7 +30,7 @@ namespace TabataGeneratorTests
                     id: 101,
                     template: false,
                     templateId: 0,
-                    label: "101 - Poids du corps 1 (new)",
+                    label: "Poids du corps 1 (new)",
                     notes: null,
                     warmup: new Duration(0, 30),
                     warmupCycles: 1,
@@ -54,7 +54,7 @@ namespace TabataGeneratorTests
         public void ReadLazyObject()
         {
             Test(@"
-- Label: 101 - Poids du corps 1 (new)
+- Label: Poids du corps 1 (new)
   Work: 30s
   Rest: 30s
 ", new[]
@@ -63,7 +63,7 @@ namespace TabataGeneratorTests
                     id: 0,
                     template: false,
                     templateId: 0,
-                    label: "101 - Poids du corps 1 (new)",
+                    label: "Poids du corps 1 (new)",
                     notes: null,
                     warmup: Duration.Empty,
                     warmupCycles: 0,
