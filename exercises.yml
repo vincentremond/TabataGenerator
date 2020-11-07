@@ -30,7 +30,7 @@
   Cycles: 4
   Work: 22s
   Rest: 38s
-  CoolDown: 5m
+  CoolDown: 3m30s
 
 # Template HIIT enchainé sans pause
 - Id: 1002
@@ -154,10 +154,10 @@
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12
   TemplateId: 1001
   Exercises:
-  - Jumping jack
-  - Montées de genou
   - Squats sautés
+  - Montées de genou
   - Mountain climbers
+  - Jumping jack
 
 - Id: 113
   Label: Poids du corps 3 (old)
