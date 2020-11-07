@@ -7,6 +7,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{3B98DC79-7354-47DF-86DB-81B01E192BB8}"
 ProjectSection(SolutionItems) = preProject
 	..\exercises.yml = ..\exercises.yml
+	..\.gitignore = ..\.gitignore
+	..\README.md = ..\README.md
 EndProjectSection
 EndProject
 Global
