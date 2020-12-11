@@ -17,7 +17,6 @@ namespace TabataGenerator.OutputFormat
             Duration warmup,
             string notes)
         {
-            // TODO VRM Remove properties !?
             Id = id;
             Title = title;
             Intervals = intervals;

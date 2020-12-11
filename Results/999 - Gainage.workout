@@ -20,6 +20,7 @@
     "isFavorite": false,
     "isRestRepsMode": false,
     "isWorkRepsMode": false,
+    "notes": "# Gainage\n\nExercises:\n- Front\n- Left\n- Right\n- Front",
     "prepare": 30,
     "rest": 30,
     "restBetweenTabatas": 0,

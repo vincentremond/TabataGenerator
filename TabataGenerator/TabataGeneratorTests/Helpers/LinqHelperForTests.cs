@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TabataGeneratorTests.Helpers
 {
@@ -29,5 +30,8 @@ namespace TabataGeneratorTests.Helpers
                 }
             }
         }
+
+        internal static (T, T) AsTupple2<T>(this IEnumerable<T> enumerable) => (enumerable.ElementAt(0), enumerable.ElementAt(1));
+        internal static (T, T, T) AsTupple3<T>(this IEnumerable<T> enumerable) => (enumerable.ElementAt(0), enumerable.ElementAt(1), enumerable.ElementAt(2));
     }
 }

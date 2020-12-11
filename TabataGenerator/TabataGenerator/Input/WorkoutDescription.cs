@@ -8,6 +8,7 @@ namespace TabataGenerator.Input
         public int Id { get; set; }
         public bool Template { get; set; }
         public int TemplateId { get; set; }
+        public bool Favorite { get; set; }
         public string Label { get; set; }
         public string Notes { get; set; }
         public Duration Warmup { get; set; }
@@ -20,7 +21,8 @@ namespace TabataGenerator.Input
         public string[] Exercises { get; set; }
 
         public WorkoutDescription()
-            : this(id: 0,
+            : this(
+                id: 0,
                 template: false,
                 templateId: 0,
                 label: "(no label)",

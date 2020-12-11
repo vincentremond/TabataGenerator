@@ -46,8 +46,12 @@
 
 - Id: 101
   Label: Poids du corps 1 (new)
-  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
+  Favorite: true
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
+    Pieds nus ok
   TemplateId: 1001
+  Cycles: 5
   Exercises:
   - Squat foot touch
   - Montée de genou
@@ -72,14 +76,16 @@
   Exercises:
   - Marche de l'ours
   - Squat sautés
-  - Pompe + Superman
+  - Pompe×3 + Superman×3
   - Grimper échelle
   - Burpees saut latéral
 
 - Id: 104
   Label: Poids du corps 4 (new)
+  Favorite: true
   Notes: |-
-    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-41
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-49
+    
     Skater: comme du patin à glace de gauche à droite en descendant le dos (gardé
     Bear plank: sur la pointe des pieds et sur les mains on crapahute d'en avant en arrière en totale contraction à 90 degrès
     Step up: départ en fente pour aller donner un coup de genoux en "explosant le plus haut possible"
@@ -150,6 +156,7 @@
 
 - Id: 112
   Label: Poids du corps 2 (old)
+  Favorite: true
   Notes: |-
     https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12
   TemplateId: 1001
@@ -167,18 +174,18 @@
   Exercises:
   - Burpees simplifiés
   - Montées de genou
-  - Pompes en T G·D
+  - Pompes en T G•D
   - Mountain climbers
 
 - Id: 114
   Label: Poids du corps 4 (old)
   Notes: |-
-    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-7
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-28
     Pompes touch épaule
   TemplateId: 1001
   Exercises:
-  - Burpees ↕ Squat (simpl.)
-  - Jump roller · ↔ ·
+  - Burpees ↕ Squat (EZ)
+  - Jump roller • ↔ •
   - Pompes touch épaule ↸
   - Jump skater G
   - Jump skater D
