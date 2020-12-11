@@ -11,16 +11,21 @@ namespace TabataGeneratorTests.Helpers
         {
             var input = new[]
             {
-                1, 2, 3,
+                1,
+                2,
+                3,
             };
             var lettuce = 0;
             var expected = new[]
             {
-                1, lettuce, 2, lettuce, 3,
+                1,
+                lettuce,
+                2,
+                lettuce,
+                3,
             };
 
             var result = input.Sandwich(lettuce);
-
 
             CollectionAssert.AreEqual(expected, result);
         }
@@ -58,8 +63,19 @@ namespace TabataGeneratorTests.Helpers
         [Test]
         public void SelectTwoTest1()
         {
-            var input = new[] {1, 2, 3, 4};
-            var expected = new[] {(1, 2), (2, 3), (3, 4)};
+            var input = new[]
+            {
+                1,
+                2,
+                3,
+                4
+            };
+            var expected = new[]
+            {
+                (1, 2),
+                (2, 3),
+                (3, 4)
+            };
             var result = input.SelectTwoConsecutives();
             CollectionAssert.AreEqual(expected, result);
         }
@@ -67,7 +83,10 @@ namespace TabataGeneratorTests.Helpers
         [Test]
         public void SelectTwoTest2()
         {
-            var input = new[] {1};
+            var input = new[]
+            {
+                1
+            };
             var expected = Enumerable.Empty<(int, int)>();
             var result = input.SelectTwoConsecutives();
             CollectionAssert.AreEqual(expected, result);

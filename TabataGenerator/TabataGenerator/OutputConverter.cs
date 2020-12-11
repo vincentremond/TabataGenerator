@@ -14,17 +14,54 @@ namespace TabataGenerator
             var result = new Result(
                 new Workout(
                     id: workoutDescription.Id,
-                    title: $"{workoutDescription.Id} - {workoutDescription.Label}",
+                    title: GetFormattedTitle(workoutDescription),
                     intervals: intervals,
                     coolDown: workoutDescription.CoolDown,
                     work: workoutDescription.Work,
                     recovery: workoutDescription.Recovery,
                     rest: workoutDescription.Warmup,
                     warmup: workoutDescription.Warmup,
-                    notes: workoutDescription.Notes
+                    notes: GetFormattedNotes(workoutDescription)
                 )
             );
             return result;
+        }
+
+        private static string GetFormattedTitle(WorkoutDescription workoutDescription)
+        {
+            if (workoutDescription.Favorite)
+            {
+                return $"{workoutDescription.Id} - {workoutDescription.Label} ⭐";
+            }else{
+
+            return $"{workoutDescription.Id} - {workoutDescription.Label}";
+            }
+        }
+
+        private static string GetFormattedNotes(WorkoutDescription workoutDescription)
+        {
+            static IEnumerable<string> FormattedNotes(WorkoutDescription d)
+            {
+                yield return $"# {d.Label}";
+
+                if (!string.IsNullOrEmpty(d.Notes))
+                {
+                    yield return string.Empty;
+                    yield return d.Notes;
+                }
+
+                if (d.Exercises.Any())
+                {
+                    yield return string.Empty;
+                    yield return "Exercises:";
+                    foreach (var e in d.Exercises)
+                    {
+                        yield return $"- {e}";
+                    }
+                }
+            }
+
+            return string.Join("\n", FormattedNotes(workoutDescription));
         }
 
         private Interval[] GetIntervals(WorkoutDescription workout)
@@ -61,7 +98,7 @@ namespace TabataGenerator
                                 )
                             );
 
-                            var shouldReplaceRecovery = workout.Recovery.IsEmpty && !isLastRecoveryAndShouldBeSkipped;
+                            var shouldReplaceRecovery = workout.Recovery.IsEmpty() && !isLastRecoveryAndShouldBeSkipped;
                             var shouldRest = !lastExercise || shouldReplaceRecovery;
 
                             AddIfNotEmpty(
@@ -94,7 +131,7 @@ namespace TabataGenerator
 
                 if (cyclesCount > 1)
                 {
-                    yield return $" · Cycle {indexCycle + 1}/{cyclesCount}";
+                    yield return $" • Cycle {indexCycle + 1}/{cyclesCount}";
                 }
 
                 yield return "]";
@@ -121,7 +158,7 @@ namespace TabataGenerator
 
         private void AddIfNotEmpty(List<Interval> result, Duration duration, IntervalType intervalType, string description)
         {
-            if (duration.IsEmpty)
+            if (duration.IsEmpty())
             {
                 return;
             }

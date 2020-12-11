@@ -9,9 +9,9 @@ namespace TabataGenerator.OutputFormat
         {
             this.Workout = workout;
         }
-        
+
         public Workout Workout { get; }
-        
+
         public int FileVersion => 1;
         public string PackageName => "com.evgeniysharafan.tabatatimer";
         public int Platform => 1;

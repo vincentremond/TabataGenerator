@@ -40,7 +40,7 @@ namespace TabataGeneratorTests
             // Work
             Assert.AreEqual(20, workout.Intervals.Count(i => i.Type == IntervalType.Work));
             Assert.AreEqual("Warmup\n[Ex. 1/4]\nSquat foot touch", workout.Intervals.First(i => i.Type == IntervalType.Work).Description);
-            Assert.AreEqual("\n[Ex. 4/4 · Cycle 4/4]\nBurpees", workout.Intervals.Last(i => i.Type == IntervalType.Work).Description);
+            Assert.AreEqual("\n[Ex. 4/4 • Cycle 4/4]\nBurpees", workout.Intervals.Last(i => i.Type == IntervalType.Work).Description);
 
             //
             Assert.IsTrue(workout.Intervals.Where(i => i.Type == IntervalType.Work).All(i => i.Time == 15));
@@ -51,30 +51,16 @@ namespace TabataGeneratorTests
         [Test]
         public void TestResultGeneration_Sample2()
         {
-            var workout = ConvertSingle(
-                @"
-- Id: 1001
-  Template: true
-  Label: HIIT
-  Warmup: 20s
-  WarmupCycles: 2
-  Cycles: 4
-  Work: 15s
-  Rest: 45s
-  CoolDown: 5m
+            var (content, title, notes) =
+                MarkdownHelper
+                    .GetCodeBlocks("Samples/TestResultGeneration_Sample2.md")
+                    .AsTupple3();
+            var result = ConvertSingle(content);
 
-- Id: 101
-  Label: Poids du corps 1 (new)
-  Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
-  TemplateId: 1001
-  Exercises:
-  - Squat foot touch
-  - Montée de genou
-  - Pompes en T
-  - Burpees"
-            );
+            Assert.AreEqual(title, result.Title);
+            Assert.AreEqual(notes, result.Notes);
 
-            SanityCheck(workout.Intervals);
+            SanityCheck(result.Intervals);
         }
 
         private static void SanityCheck(Interval[] intervals)

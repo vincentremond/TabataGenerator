@@ -24,9 +24,7 @@ namespace TabataGenerator.Input
         {
         }
 
-        public bool IsEmpty => _timeSpan == TimeSpan.Zero;
-
-        public static Duration Empty => new Duration(TimeSpan.Zero);
+        public static Duration Empty => new(TimeSpan.Zero);
         public int TotalSeconds => (int)_timeSpan.TotalSeconds;
 
         public static implicit operator Duration(TimeSpan timeSpan) => new Duration(timeSpan);

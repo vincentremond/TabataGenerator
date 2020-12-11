@@ -47,6 +47,5 @@ namespace TabataGenerator.Helpers
 
         public static string Concat(this IEnumerable<string> enumerable)
             => string.Concat(enumerable);
-
     }
 }

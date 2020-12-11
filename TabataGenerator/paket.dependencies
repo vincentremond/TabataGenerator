@@ -1,0 +1,10 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+framework: net5.0
+nuget Microsoft.NET.Test.Sdk
+nuget Microsoft.Toolkit.Parsers
+nuget nunit
+nuget NUnit3TestAdapter
+nuget ObjectDumper.NET
+nuget YamlDotNet

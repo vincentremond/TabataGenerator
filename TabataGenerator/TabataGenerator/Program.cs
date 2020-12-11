@@ -21,13 +21,19 @@ namespace TabataGenerator
             var outputConverter = new OutputConverter();
             foreach (var workout in workouts)
             {
+                var fileName = GetFileName(workout.Id, workout.Label);
                 var result = outputConverter.BuildResult(workout);
                 var serializedObject = Serialize(result);
-                Console.WriteLine(result.Workout.Title);
-                WriteToFile(serializedObject, result.Workout.Title, resultDirectory);
+                Console.WriteLine(fileName);
+                WriteToFile(serializedObject, resultDirectory, fileName);
             }
 
             Console.WriteLine("done");
+        }
+
+        private static string GetFileName(int id, string title)
+        {
+            return $"{id} - {title}.workout";
         }
 
         private static string GetResultDirectoryPath(FileInfo configFile)
@@ -59,9 +65,9 @@ namespace TabataGenerator
             throw new Exception($"Config file {ExercicesFile} not found.");
         }
 
-        private static void WriteToFile(string serializedObject, string workoutLabel, string resultDirectory)
+        private static void WriteToFile(string serializedObject, string resultDirectory, string fileName)
         {
-            var outputPath = Path.Combine(resultDirectory, $"{workoutLabel}.workout");
+            var outputPath = Path.Combine(resultDirectory, fileName);
             File.WriteAllText(outputPath, serializedObject);
         }
 
