@@ -24,7 +24,7 @@ var workoutDescriptionArray = new WorkoutDescription[]
     Id = 101,
     Template = false,
     TemplateId = 0,
-    Favorite = false,kr
+    Favorite = false,
     Label = "Poids du corps 1 (new)",
     Notes = null,
     Warmup = new Duration
@@ -49,6 +49,7 @@ var workoutDescriptionArray = new WorkoutDescription[]
     {
       TotalSeconds = 450
     },
+    Settings = null,
     Exercises = new string[]
     {
       "Squat foot touch",

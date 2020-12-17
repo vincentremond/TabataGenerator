@@ -10,7 +10,7 @@ namespace TabataGenerator
 {
     public class WorkoutReader
     {
-        public WorkoutDescription[] Read(string input)
+        public WorkoutDescription[] GetFromContent(string input)
         {
             var workoutDescriptions = new Deserializer().Deserialize<WorkoutDescription[]>(input);
 

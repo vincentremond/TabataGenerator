@@ -25,6 +25,7 @@ var workoutDescriptionArray = new WorkoutDescription[]
     {
       TotalSeconds = 30
     },
+    Settings = null,
     Exercises = new string[]
     {
       "(no label)"

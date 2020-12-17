@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TabataGenerator.Input
 {
@@ -18,6 +19,7 @@ namespace TabataGenerator.Input
         public Duration Rest { get; set; }
         public Duration Recovery { get; set; }
         public Duration CoolDown { get; set; }
+        public Dictionary<string, string> Settings { get; set; }
         public string[] Exercises { get; set; }
 
         public WorkoutDescription()
@@ -34,6 +36,7 @@ namespace TabataGenerator.Input
                 rest: Duration.Empty,
                 recovery: Duration.Empty,
                 coolDown: Duration.Empty,
+                settings: null,
                 exercises: new[]
                 {
                     "(no label)"
@@ -42,8 +45,7 @@ namespace TabataGenerator.Input
         {
         }
 
-        public WorkoutDescription(
-            int id,
+        public WorkoutDescription(int id,
             bool template,
             int templateId,
             string label,
@@ -55,6 +57,7 @@ namespace TabataGenerator.Input
             Duration rest,
             Duration recovery,
             Duration coolDown,
+            Dictionary<string, string> settings,
             string[] exercises)
         {
             Id = id;
@@ -69,6 +72,7 @@ namespace TabataGenerator.Input
             Rest = rest;
             Recovery = recovery;
             CoolDown = coolDown;
+            Settings = settings;
             Exercises = exercises;
         }
     }
