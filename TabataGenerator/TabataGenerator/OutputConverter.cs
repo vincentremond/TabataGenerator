@@ -8,34 +8,27 @@ namespace TabataGenerator
 {
     public class OutputConverter
     {
-        public Result BuildResult(WorkoutDescription workoutDescription)
+        public Workout BuildResult(WorkoutDescription workoutDescription)
         {
             var intervals = GetIntervals(workoutDescription).ToArray();
-            var result = new Result(
-                new Workout(
-                    id: workoutDescription.Id,
-                    title: GetFormattedTitle(workoutDescription),
-                    intervals: intervals,
-                    coolDown: workoutDescription.CoolDown,
-                    work: workoutDescription.Work,
-                    recovery: workoutDescription.Recovery,
-                    rest: workoutDescription.Warmup,
-                    warmup: workoutDescription.Warmup,
-                    notes: GetFormattedNotes(workoutDescription)
-                )
+            return new Workout(
+                id: workoutDescription.Id,
+                title: GetFormattedTitle(workoutDescription),
+                intervals: intervals,
+                coolDown: workoutDescription.CoolDown,
+                work: workoutDescription.Work,
+                recovery: workoutDescription.Recovery,
+                rest: workoutDescription.Warmup,
+                warmup: workoutDescription.Warmup,
+                notes: GetFormattedNotes(workoutDescription)
             );
-            return result;
         }
 
         private static string GetFormattedTitle(WorkoutDescription workoutDescription)
         {
-            if (workoutDescription.Favorite)
-            {
-                return $"{workoutDescription.Id} - {workoutDescription.Label} ⭐";
-            }else{
-
-            return $"{workoutDescription.Id} - {workoutDescription.Label}";
-            }
+            return workoutDescription.Favorite
+                ? $"{workoutDescription.Id} - {workoutDescription.Label} ⭐"
+                : $"{workoutDescription.Id} - {workoutDescription.Label}";
         }
 
         private static string GetFormattedNotes(WorkoutDescription workoutDescription)
@@ -77,13 +70,13 @@ namespace TabataGenerator
         private void AddCyclesAndExercises(WorkoutDescription workout, List<Interval> result, string prefix, int cyclesCount, bool skipLastRecovery) =>
             LinqHelper.ForEach(
                 cyclesCount,
-                (indexCycle, firstCycle, lastCycle) =>
+                (indexCycle, _, lastCycle) =>
                 {
                     var isLastRecoveryAndShouldBeSkipped = skipLastRecovery && lastCycle;
 
                     LinqHelper.ForEach(
                         workout.Exercises,
-                        (indexExercise, exercise, firstExercise, lastExercise) =>
+                        (indexExercise, exercise, _, lastExercise) =>
                         {
                             AddExercise(
                                 result,

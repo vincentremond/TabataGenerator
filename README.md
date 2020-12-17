@@ -15,4 +15,4 @@ Generated files can be used by a [Tabata Timer](https://play.google.com/store/ap
 - [x] Markdown unit test
 - [x] Favorites
 - [x] 3*Superman et 3×planche
-- [ ] Export import all
+- [x] Export import all
