@@ -91,8 +91,7 @@ namespace TabataGeneratorTests
                 .Read(input)
                 .Single();
             return new OutputConverter()
-                .BuildResult(workoutDescription)
-                .Workout;
+                .BuildResult(workoutDescription);
         }
     }
 }

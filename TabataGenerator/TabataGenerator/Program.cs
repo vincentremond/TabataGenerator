@@ -19,14 +19,18 @@ namespace TabataGenerator
             var workouts = new WorkoutReader().Read(configContent);
 
             var outputConverter = new OutputConverter();
-            foreach (var workout in workouts)
-            {
-                var fileName = GetFileName(workout.Id, workout.Label);
-                var result = outputConverter.BuildResult(workout);
-                var serializedObject = Serialize(result);
-                Console.WriteLine(fileName);
-                WriteToFile(serializedObject, resultDirectory, fileName);
-            }
+            var converted = workouts.Select(
+                w => new
+                {
+                    FileName = GetFileName(w.Id, w.Label),
+                    Workout = outputConverter.BuildResult(w),
+                }
+            ).ToList();
+
+            converted.ForEach(c => WriteToFile(new Result(c.Workout), resultDirectory, c.FileName));
+
+            var all = new ResultList(converted.Select(c => c.Workout).ToArray());
+            WriteToFile(all, resultDirectory, "all.workout");
 
             Console.WriteLine("done");
         }
@@ -65,13 +69,15 @@ namespace TabataGenerator
             throw new Exception($"Config file {ExercicesFile} not found.");
         }
 
-        private static void WriteToFile(string serializedObject, string resultDirectory, string fileName)
+        private static void WriteToFile<T>(T obj, string resultDirectory, string fileName)
         {
+            var serializedObject = Serialize(obj);
+            Console.WriteLine($"Writing to file : {fileName}");
             var outputPath = Path.Combine(resultDirectory, fileName);
             File.WriteAllText(outputPath, serializedObject);
         }
 
-        private static string Serialize(Result result)
+        private static string Serialize<T>(T result)
         {
             var jsonSerializerSettings = new JsonSerializerSettings()
             {
