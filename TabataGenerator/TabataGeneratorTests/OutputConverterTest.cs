@@ -88,10 +88,10 @@ namespace TabataGeneratorTests
         private Workout ConvertSingle(string input)
         {
             var workoutDescription = new WorkoutReader()
-                .Read(input)
+                .GetFromContent(input)
                 .Single();
             return new OutputConverter()
-                .BuildResult(workoutDescription);
+                .BuildWorkout(workoutDescription);
         }
     }
 }

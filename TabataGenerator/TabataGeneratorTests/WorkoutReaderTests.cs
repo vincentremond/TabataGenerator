@@ -14,7 +14,7 @@ namespace TabataGeneratorTests
                 MarkdownHelper
                     .GetCodeBlocks(fileName)
                     .AsTupple2();
-            var result = new WorkoutReader().Read(input);
+            var result = new WorkoutReader().GetFromContent(input);
             var resultCsharp = ObjectDumper.Dump(result, DumpStyle.CSharp).WindowsToUnixLineBreak();
             Assert.AreEqual(expected, resultCsharp);
         }

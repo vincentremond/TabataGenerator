@@ -10,6 +10,17 @@
   - Right
   - Front
 
+- Id: 998
+  Label: Vacuum
+  Warmup: 40s
+  Cycles: 6
+  Work: 25s
+  Rest: 26s
+  Settings:
+    key_workout_sound_time: 11
+    key_workout_sound_latest_seconds: value_sound_wood_2
+    key_workout_sound_last_seconds_work: value_sound_glass
+
 # Template HIIT Machine (work, rest, work, rest, recovery)
 - Id: 1000
   Template: true

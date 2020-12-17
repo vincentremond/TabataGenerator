@@ -8,7 +8,7 @@ namespace TabataGenerator
 {
     public class OutputConverter
     {
-        public Workout BuildResult(WorkoutDescription workoutDescription)
+        public Workout BuildWorkout(WorkoutDescription workoutDescription)
         {
             var intervals = GetIntervals(workoutDescription).ToArray();
             return new Workout(
@@ -20,6 +20,7 @@ namespace TabataGenerator
                 recovery: workoutDescription.Recovery,
                 rest: workoutDescription.Warmup,
                 warmup: workoutDescription.Warmup,
+                settings: workoutDescription.Settings,
                 notes: GetFormattedNotes(workoutDescription)
             );
         }
@@ -118,18 +119,29 @@ namespace TabataGenerator
                 }
 
                 yield return "\n";
-                yield return "[";
 
-                yield return $"Ex. {indexExercise + 1}/{exercisesCount}";
-
-                if (cyclesCount > 1)
+                if (exercisesCount > 1 || cyclesCount > 1)
                 {
-                    yield return $" • Cycle {indexCycle + 1}/{cyclesCount}";
+                    yield return "[";
+                    if (exercisesCount > 1)
+                    {
+                        yield return $"Ex. {indexExercise + 1}/{exercisesCount}";
+                    }
+
+                    if (exercisesCount > 1 && cyclesCount > 1)
+                    {
+                        yield return " • ";
+                    }
+
+                    if (cyclesCount > 1)
+                    {
+                        yield return $"Cycle {indexCycle + 1}/{cyclesCount}";
+                    }
+
+                    yield return "]";
+                    yield return "\n";
                 }
 
-                yield return "]";
-
-                yield return "\n";
                 yield return exercise;
             }
 

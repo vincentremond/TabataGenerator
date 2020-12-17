@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TabataGenerator.Input;
 
@@ -15,12 +16,14 @@ namespace TabataGenerator.OutputFormat
             Duration recovery,
             Duration rest,
             Duration warmup,
+            Dictionary<string, string> settings,
             string notes)
         {
             Id = id;
             Title = title;
             Intervals = intervals;
             Notes = notes;
+            Settings = settings;
 
             CoolDown = coolDown.TotalSeconds;
             Work = work.TotalSeconds;
@@ -55,6 +58,10 @@ namespace TabataGenerator.OutputFormat
         public string RestDescription => null;
 
         public int RestReps => 0;
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, string> Settings { get; }
+
         public bool SkipLastRestInterval => true;
         public bool SkipPrepareAndCoolDownBetweenWorkouts => false;
         public int TabatasCount => 1;
