@@ -39,7 +39,7 @@ namespace TabataGeneratorTests
 
             // Work
             Assert.AreEqual(20, workout.Intervals.Count(i => i.Type == IntervalType.Work));
-            Assert.AreEqual("Warmup\n[Ex. 1/4]\nSquat foot touch", workout.Intervals.First(i => i.Type == IntervalType.Work).Description);
+            Assert.AreEqual("Warmup\n[Ex. 1/4 • Cycle 1/1+4]\nSquat foot touch", workout.Intervals.First(i => i.Type == IntervalType.Work).Description);
             Assert.AreEqual("\n[Ex. 4/4 • Cycle 4/4]\nBurpees", workout.Intervals.Last(i => i.Type == IntervalType.Work).Description);
 
             //

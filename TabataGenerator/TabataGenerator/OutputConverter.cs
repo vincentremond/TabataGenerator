@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using TabataGenerator.Helpers;
 using TabataGenerator.Input;
 using TabataGenerator.OutputFormat;
@@ -62,13 +63,27 @@ namespace TabataGenerator
         {
             var result = new List<Interval>();
             AddIfNotEmpty(result, workout.Warmup, IntervalType.Prepare, null);
-            AddCyclesAndExercises(workout, result, "Warmup", workout.WarmupCycles, skipLastRecovery: false);
-            AddCyclesAndExercises(workout, result, string.Empty, workout.Cycles, skipLastRecovery: true);
+            AddCyclesAndExercises(
+                workout,
+                result,
+                "Warmup",
+                workout.WarmupCycles,
+                skipLastRecovery: false,
+                additionalCyclesCount: workout.Cycles
+            );
+            AddCyclesAndExercises(
+                workout,
+                result,
+                string.Empty,
+                workout.Cycles,
+                skipLastRecovery: true,
+                additionalCyclesCount: null
+            );
             AddIfNotEmpty(result, workout.CoolDown, IntervalType.CoolDown, null);
             return result.ToArray();
         }
 
-        private void AddCyclesAndExercises(WorkoutDescription workout, List<Interval> result, string prefix, int cyclesCount, bool skipLastRecovery) =>
+        private void AddCyclesAndExercises(WorkoutDescription workout, List<Interval> result, string prefix, int cyclesCount, bool skipLastRecovery, int? additionalCyclesCount) =>
             LinqHelper.ForEach(
                 cyclesCount,
                 (indexCycle, _, lastCycle) =>
@@ -88,7 +103,8 @@ namespace TabataGenerator
                                     indexCycle,
                                     indexExercise,
                                     exercise,
-                                    workout.Exercises.Length
+                                    workout.Exercises.Length,
+                                    additionalCyclesCount
                                 )
                             );
 
@@ -109,7 +125,7 @@ namespace TabataGenerator
                 }
             );
 
-        private static string GetLabel(string prefix, int cyclesCount, int indexCycle, int indexExercise, string exercise, int exercisesCount)
+        private static string GetLabel(string prefix, int cyclesCount, int indexCycle, int indexExercise, string exercise, int exercisesCount, int? additionalCyclesCount)
         {
             IEnumerable<string> GetParts()
             {
@@ -120,22 +136,29 @@ namespace TabataGenerator
 
                 yield return "\n";
 
-                if (exercisesCount > 1 || cyclesCount > 1)
+                var showExercises = exercisesCount > 1;
+                var showCycles = cyclesCount > 1 || additionalCyclesCount.HasValue;
+
+                if (showExercises || showCycles)
                 {
                     yield return "[";
-                    if (exercisesCount > 1)
+                    if (showExercises)
                     {
                         yield return $"Ex. {indexExercise + 1}/{exercisesCount}";
                     }
 
-                    if (exercisesCount > 1 && cyclesCount > 1)
+                    if (showExercises && showCycles)
                     {
                         yield return " • ";
                     }
 
-                    if (cyclesCount > 1)
+                    if (showCycles)
                     {
                         yield return $"Cycle {indexCycle + 1}/{cyclesCount}";
+                        if (additionalCyclesCount.HasValue)
+                        {
+                            yield return $"+{additionalCyclesCount.Value}";
+                        }
                     }
 
                     yield return "]";
@@ -145,7 +168,8 @@ namespace TabataGenerator
                 yield return exercise;
             }
 
-            return GetParts().Concat();
+            var concat = GetParts().Concat();
+            return concat;
         }
 
         private void AddExercise(List<Interval> result, Duration duration, string description)
