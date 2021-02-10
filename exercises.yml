@@ -39,8 +39,8 @@
   Warmup: 20s
   WarmupCycles: 2
   Cycles: 4
-  Work: 22s
-  Rest: 38s
+  Work: 25s
+  Rest: 35s
   CoolDown: 3m30s
 
 # Template HIIT enchainé sans pause
@@ -109,6 +109,55 @@
   - Break dancer
   - Step up (gauche)
 
+- Id: 111
+  Label: Poids du corps 1 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-9
+  TemplateId: 1001
+  Exercises:
+  - Kick fit fight
+  - Squat groupé
+  - Moutain climbers croisés
+  - Fentes sautées
+
+- Id: 112
+  Label: Poids du corps 2 (old)
+  Favorite: true
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12
+  TemplateId: 1001
+  Cycles: 5
+  Exercises:
+  - Squats sautés
+  - Montées de genou
+  - Mountain climbers
+  - Jumping jack
+
+- Id: 113
+  Label: Poids du corps 3 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-7
+  TemplateId: 1001
+  Cycles: 5
+  Exercises:
+  - Burpees simplifiés
+  - Montées de genou
+  - Pompes en T G•D
+  - Mountain climbers
+
+- Id: 114
+  Label: Poids du corps 4 (old)
+  Notes: |-
+    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-28
+    Pompes touch épaule
+  TemplateId: 1001
+  Exercises:
+  - Burpees ↕ Squat (EZ)
+  - Jump roller • ↔ •
+  - Pompes touch épaule ↸
+  - Jump skater G
+  - Jump skater D
+
 - Id: 105
   Label: Elliptique (new)
   Notes: https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-42
@@ -153,53 +202,6 @@
   - 6 touches, course arrière
   - Jambes libre
   - Bras libre
-
-- Id: 111
-  Label: Poids du corps 1 (old)
-  Notes: |-
-    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-9
-  TemplateId: 1001
-  Exercises:
-  - Kick fit fight
-  - Squat groupé
-  - Moutain climbers croisés
-  - Fentes sautées
-
-- Id: 112
-  Label: Poids du corps 2 (old)
-  Favorite: true
-  Notes: |-
-    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12
-  TemplateId: 1001
-  Exercises:
-  - Squats sautés
-  - Montées de genou
-  - Mountain climbers
-  - Jumping jack
-
-- Id: 113
-  Label: Poids du corps 3 (old)
-  Notes: |-
-    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-7
-  TemplateId: 1001
-  Exercises:
-  - Burpees simplifiés
-  - Montées de genou
-  - Pompes en T G•D
-  - Mountain climbers
-
-- Id: 114
-  Label: Poids du corps 4 (old)
-  Notes: |-
-    https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-28
-    Pompes touch épaule
-  TemplateId: 1001
-  Exercises:
-  - Burpees ↕ Squat (EZ)
-  - Jump roller • ↔ •
-  - Pompes touch épaule ↸
-  - Jump skater G
-  - Jump skater D
 
 - Id: 201
   Label: Haltères
