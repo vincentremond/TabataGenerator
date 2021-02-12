@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="paket.references" />
+    <Content Include="Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="Helpers.fs" />
+    <Compile Include="Model.fs" />
+    <Compile Include="IdiomaticDuConverter.fs" />
+    <Compile Include="Configuration.fs" />
+    <Compile Include="WorkoutConfigurationConverter.fs" />
+    <Compile Include="WorkoutIntervalExpander.fs" />
+    <Compile Include="OutputFileFormat.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <Import Project="..\.paket\Paket.Restore.targets" />
+</Project>
