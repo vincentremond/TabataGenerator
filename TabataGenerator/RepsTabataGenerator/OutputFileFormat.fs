@@ -2,7 +2,9 @@
 
 open System
 open System.Collections.Generic
+open System.Runtime.Serialization
 open System.Text.Json.Serialization
+open Newtonsoft.Json
 open RepsTabataGenerator.Model
 open RepsTabataGenerator.WorkoutIntervalExpander
 
@@ -19,11 +21,11 @@ module OutputFileFormat =
             tabata: int
             tabatasCount: int
             time: int
-            [<JsonPropertyName("type")>]
+            [<JsonProperty("type")>]
             intervalType: int
-            [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)>]
+            [<JsonProperty(NullValueHandling = NullValueHandling.Ignore)>]
             description: string
-            [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)>]
+            [<JsonProperty(NullValueHandling = NullValueHandling.Ignore)>]
             url: string
         }
 
@@ -39,7 +41,7 @@ module OutputFileFormat =
             isFavorite: bool
             isRestRepsMode: bool
             isWorkRepsMode: bool
-            [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)>]
+            [<JsonProperty(NullValueHandling = NullValueHandling.Ignore)>]
             notes: string
             prepare: int
             rest: int
@@ -48,10 +50,10 @@ module OutputFileFormat =
             restBetweenWorkoutsRepsMode: bool
             restBetweenWorkoutsTime: int
             restBpm: int
-            [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)>]
+            [<JsonProperty(NullValueHandling = NullValueHandling.Ignore)>]
             restDescription: string
             restReps: int
-            [<JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)>]
+            [<JsonProperty(NullValueHandling = NullValueHandling.Ignore)>]
             settings: Dictionary<string, string>
             skipLastRestInterval: bool
             skipPrepareAndCoolDownBetweenWorkouts: bool
@@ -70,7 +72,7 @@ module OutputFileFormat =
             fileVersion: int
             packageName: string
             platform: int
-            [<JsonPropertyName("type")>]
+            [<JsonProperty("type")>]
             fileType: int
             versionCode: int
             versionName: string
@@ -99,7 +101,7 @@ module OutputFileFormat =
             url = null
         }
 
-    let private intervalReps intervalType (bpm:BPM) (reps:Reps) description url =
+    let private intervalReps intervalType (bpm: BPM) (reps: Reps) description url =
         {
             addSet = false
             bpm = bpm

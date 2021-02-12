@@ -16,6 +16,7 @@
     <Compile Include="WorkoutConfigurationConverter.fs" />
     <Compile Include="WorkoutIntervalExpander.fs" />
     <Compile Include="OutputFileFormat.fs" />
+    <Compile Include="OutputSerialization.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
