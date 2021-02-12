@@ -1,0 +1,131 @@
+﻿{
+  "Exercises": [
+    {
+      "Name": "Bear plank",
+      "BPM": 30,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Break dancer",
+      "BPM": 30,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Burpees",
+      "BPM": 30,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Jumping jack",
+      "BPM": 150,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Montées de genoux",
+      "BPM": 180,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Mountain climbers",
+      "BPM": 120,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Pompes en T",
+      "BPM": 12,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Skater",
+      "BPM": 60,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Squat foot touch",
+      "BPM": 20,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Squats sautés",
+      "BPM": 180,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    },
+    {
+      "Name": "Step up",
+      "BPM": 45,
+      "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+    }
+  ],
+  "Templates": [
+    {
+      "Name": "HIIT",
+      "Warmup": "00:00:20",
+      "WarmupCycles": 2,
+      "Cycles": 5,
+      "Work": "00:00:25",
+      "Rest": "00:00:35",
+      "Recovery": "00:00:00",
+      "CoolDown": "00:03:00"
+    },
+    {
+      "Name": "HIIT Machine",
+      "Warmup": "00:07:30",
+      "WarmupCycles": 0,
+      "Cycles": 16,
+      "Work": "00:00:30",
+      "Rest": "00:00:00",
+      "Recovery": "00:00:30",
+      "CoolDown": "00:05:00"
+    },
+    {
+      "Name": "Circuit Training",
+      "Warmup": "00:00:20",
+      "WarmupCycles": 2,
+      "Cycles": 5,
+      "Work": "00:00:30",
+      "Rest": "00:00:05",
+      "Recovery": "00:01:15",
+      "CoolDown": "00:03:00"
+    }
+  ],
+  "Workouts": [
+    {
+      "Id": "101",
+      "Name": "Poids du corps 1 (new)",
+      "Notes": "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38",
+      "Template": "HIIT",
+      "Exercises": [
+        "Squat foot touch",
+        "Montées de genoux",
+        "Pompes en T",
+        "Burpees"
+      ]
+    },
+    {
+      "Id": "102",
+      "Name": "Poids du corps 4 (new)",
+      "Notes": "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-49",
+      "Template": "HIIT",
+      "Cycles": 4,
+      "Exercises": [
+        "Skater",
+        "Bear plank",
+        "Step up",
+        "Break dancer",
+        "Step up"
+      ]
+    },
+    {
+      "Id": "103",
+      "Name": "Poids du corps 2 (old)",
+      "Notes": "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12",
+      "Template": "HIIT",
+      "Exercises": [
+        "Squats sautés",
+        "Montées de genoux",
+        "Mountain climbers",
+        "Jumping jack"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+Exercises:
+  'Bear plank':
+    BPM: 30
+    GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif'
+  'Break dancer': { BPM: 30 , GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Burpees': { BPM: 30, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Jumping jack': { BPM: 150, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Montées de genou': { BPM: 180, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Mountain climbers': { BPM: 120, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Pompes en T': { BPM: 12, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Skater': { BPM: 60, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Squat foot touch': { BPM: 20, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Squats sautés': { BPM: 180, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+  'Step up': { BPM: 45, GIF: 'https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif' }
+
+Templates:
+  'HIIT':
+    Warmup: 00:00:20
+    WarmupCycles: 2
+    Cycles: 5
+    Work: 00:00:25
+    Rest: 00:00:35
+    Recovery: 00:00:00
+    CoolDown: 00:03:00
+  'HIIT Machine':
+    Warmup: 00:07:30
+    WarmupCycles: 0
+    Cycles: 16
+    Work: 00:00:30
+    Rest: 00:00:00
+    Recovery: 00:00:30
+    CoolDown: 00:05:00
+  'Circuit Training':
+    Warmup: 00:00:20
+    WarmupCycles: 2
+    Cycles: 5
+    Work: 00:00:30
+    Rest: 00:00:5
+    Recovery: 00:01:15
+    CoolDown: 00:03:00
+
+Workouts:
+  101:
+    Label: Poids du corps 1 (new)
+    Notes: |-
+      https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38
+    Template: HIIT
+    Exercises:
+    - Squat foot touch
+    - Montées de genoux
+    - Pompes en T
+    - Burpees
