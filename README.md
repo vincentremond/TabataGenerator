@@ -6,13 +6,6 @@ Generated files can be used by a [Tabata Timer](https://play.google.com/store/ap
 
 ## TODO
 
-- [x] Titre dans les notes
-- [x] Exercises dans les notes
-- [x] Lien pdc4 ko
-- [x] Pdc 1 new piedq nus et x5
-- [x] Middle dot replaced
-- [x] Use paket
-- [x] Markdown unit test
-- [x] Favorites
-- [x] 3*Superman et 3×planche
-- [x] Export import all
+- [ ] Add notes
+- [ ] Add cycles "2+5"
+- [ ] Fix json attributes
