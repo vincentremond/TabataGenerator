@@ -175,7 +175,7 @@ module OutputFileFormat =
             fileVersion = 1
             packageName = "com.evgeniysharafan.tabatatimer"
             platform = 1
-            fileType = 1
+            fileType = 3
             versionCode = 502002
             versionName = "5.2.2"
         }

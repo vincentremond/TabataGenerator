@@ -14,5 +14,5 @@ module EntryPoint =
         |> OutputFileFormat.createResult
         |> OutputSerialization.serialize
         |> writeToFile "result.workout"
-
+        printfn "Done, written to file"
         0 // return an integer exit code
