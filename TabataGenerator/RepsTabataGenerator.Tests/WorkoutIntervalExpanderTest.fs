@@ -30,7 +30,7 @@ let Test1 () =
         {
             Id = 1
             Title = "Title"
-            Notes = "Notes"
+            Notes = "Notes\n\nExercises:\n• Ex1\n• Ex2"
             Intervals =
                 [|
                     DetailedInterval.Prepare(TimeSpan.FromSeconds(15.))
