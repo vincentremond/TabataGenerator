@@ -23,7 +23,10 @@ module WorkoutIntervalExpander =
         }
 
     let getRepsCount bpm (duration: Duration) bpmAdjust: Reps =
-        Convert.ToInt32(Math.Ceiling(bpmAdjust * (float bpm) * duration.TotalSeconds / 60.))
+        Convert.ToInt32
+            (Math.Ceiling
+                (bpmAdjust * (float bpm) * duration.TotalSeconds
+                 / 60.))
 
     let createRepsInterval label (bpm: BPM) gif duration bpmAdjust =
         DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), bpm, gif)
@@ -78,10 +81,20 @@ module WorkoutIntervalExpander =
 
         description |> createIntervals' |> Seq.toArray
 
+    let private getNotes (description: WorkoutSimpleDescription) =
+        let getExLabel ex =
+            match ex with
+            | ExerciseDuration l -> l
+            | ExerciseReps (l, _, _) -> l
+
+        description.Notes
+        + "\n\nExercises:\n"
+        + (String.Join("\n", description.Exercises |> Seq.map getExLabel |> Seq.map (fun l -> $"• {l}")))
+
     let create (description: WorkoutSimpleDescription): DetailedWorkout =
         {
             Id = description.Id
             Title = description.Title
-            Notes = description.Notes
+            Notes = (getNotes description)
             Intervals = (createIntervals description)
         }

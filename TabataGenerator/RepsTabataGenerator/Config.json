@@ -2,13 +2,13 @@
   "Exercises": [
     { "Name": "Bear plank", "BPM": 30, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
     { "Name": "Break dancer", "BPM": 30, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
-    { "Name": "Burpees", "BPM": 30, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
+    { "Name": "Burpees", "BPM": 17, "GIF": "https://pas-bien.net/divers/tabata/burpees.gif" },
     { "Name": "Jumping jack", "BPM": 120, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
-    { "Name": "Montées de genoux", "BPM": 135, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
-    { "Name": "Mountain climbers", "BPM": 100, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
-    { "Name": "Pompes en T", "BPM": 10, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
+    { "Name": "Montées de genoux", "BPM": 135, "GIF": "https://pas-bien.net/divers/tabata/montees-genoux.gif" },
+    { "Name": "Mountain climbers", "BPM": 100, "GIF": "https://pas-bien.net/divers/tabata/montain-climbers.gif" },
+    { "Name": "Pompes en T", "BPM": 12, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
     { "Name": "Skater", "BPM": 60, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
-    { "Name": "Squat foot touch", "BPM": 15, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
+    { "Name": "Squat foot touch", "BPM": 22, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
     { "Name": "Squats sautés", "BPM": 40, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
     { "Name": "Step up", "BPM": 30, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" },
     { "Name": "Coude genoux", "BPM": 30, "GIF": "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
