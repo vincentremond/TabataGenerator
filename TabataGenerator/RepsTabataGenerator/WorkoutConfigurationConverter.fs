@@ -1,6 +1,5 @@
 ﻿namespace RepsTabataGenerator
 
-open RepsTabataGenerator.Helpers
 open RepsTabataGenerator.Configuration
 open RepsTabataGenerator.Model
 
@@ -23,6 +22,7 @@ module WorkoutConfigurationConverter =
             Recovery: Duration
             CoolDown: Duration
             Exercises: Exercise array
+            Settings: Settings
         }
 
     let convertConfig (root: Config): WorkoutSimpleDescription array =
@@ -31,23 +31,19 @@ module WorkoutConfigurationConverter =
             |> Seq.filter (fun x -> x.Name = name)
             |> Seq.tryExactlyOne
 
-        let convertConfig' workout =
-            let template =
-                root.Templates
-                |> Seq.filter (fun x -> x.Name = workout.Template)
-                |> Seq.exactlyOne
-
+        let convertConfig' (workout:Workout) =
             {
                 Id = workout.Id
                 Title = workout.Name
                 Notes = workout.Notes
-                Warmup = template.Warmup
-                WarmupCycles =  workout.WarmupCycles |?? template.WarmupCycles
-                Cycles = workout.Cycles |? template.Cycles
-                Work = template.Work
-                Rest = template.Rest
-                Recovery = template.Recovery
-                CoolDown = template.CoolDown
+                Warmup = workout.Template.Warmup
+                WarmupCycles = workout.Template.WarmupCycles
+                Cycles = workout.Template.Cycles
+                Work = workout.Template.Work
+                Rest = workout.Template.Rest
+                Recovery = workout.Template.Recovery
+                CoolDown = workout.Template.CoolDown
+                Settings = workout.Settings
                 Exercises =
                     workout.Exercises
                     |> Array.map (fun e ->

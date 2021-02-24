@@ -19,6 +19,7 @@ let Test1 () =
             CoolDown =  TimeSpan.FromSeconds(300.)
             WarmupCycles = Some 2
             Cycles = 3
+            Settings = None
             Exercises =
                 [|
                     Exercise.ExerciseDuration("Ex1")
@@ -31,6 +32,7 @@ let Test1 () =
             Id = 1
             Title = "Title"
             Notes = "Notes\n\nExercises:\n• Ex1\n• Ex2"
+            Settings = None
             Intervals =
                 [|
                     DetailedInterval.Prepare(TimeSpan.FromSeconds(15.))

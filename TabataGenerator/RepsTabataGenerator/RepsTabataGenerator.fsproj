@@ -6,12 +6,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="paket.references" />
-    <Content Include="Config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Helpers.fs" />
     <Compile Include="Model.fs" />
-    <Compile Include="IdiomaticDuConverter.fs" />
     <Compile Include="Configuration.fs" />
     <Compile Include="WorkoutConfigurationConverter.fs" />
     <Compile Include="WorkoutIntervalExpander.fs" />

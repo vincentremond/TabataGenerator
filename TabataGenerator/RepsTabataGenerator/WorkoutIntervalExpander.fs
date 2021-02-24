@@ -20,6 +20,7 @@ module WorkoutIntervalExpander =
             Title: Label
             Notes: string
             Intervals: DetailedInterval array
+            Settings: Settings
         }
 
     let getRepsCount bpm (duration: Duration) bpmAdjust: Reps =
@@ -97,4 +98,5 @@ module WorkoutIntervalExpander =
             Title = description.Title
             Notes = (getNotes description)
             Intervals = (createIntervals description)
+            Settings = description.Settings
         }
