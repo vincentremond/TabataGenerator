@@ -7,7 +7,7 @@ open RepsTabataGenerator.WorkoutConfigurationConverter
 
 [<Test>]
 let Test1 () =
-    let xx =
+    let config =
         {
             Exercises =
                 [|
@@ -17,28 +17,23 @@ let Test1 () =
                         GIF = "https://ex2.gif"
                     }
                 |]
-            Templates =
-                [|
-                    {
-                        Name = "Template1"
-                        Warmup = TimeSpan.FromSeconds(15.)
-                        WarmupCycles = Some 2
-                        Cycles = 3
-                        Work = TimeSpan.FromSeconds(30.)
-                        Rest = TimeSpan.FromSeconds(5.)
-                        Recovery = TimeSpan.FromSeconds(60.)
-                        CoolDown = TimeSpan.FromSeconds(300.)
-                    }
-                |]
             Workouts =
                 [|
                     {
                         Id = 1
                         Name = "Title"
                         Notes = "Notes"
-                        Template = "Template1"
-                        WarmupCycles = None
-                        Cycles = Some 3
+                        Template =
+                            {
+                                Warmup = TimeSpan.FromSeconds(15.)
+                                WarmupCycles = Some 2
+                                Cycles = 3
+                                Work = TimeSpan.FromSeconds(30.)
+                                Rest = TimeSpan.FromSeconds(5.)
+                                Recovery = TimeSpan.FromSeconds(60.)
+                                CoolDown = TimeSpan.FromSeconds(300.)
+                            }
+                        Settings = None
                         Exercises = [| "Ex1"; "Ex2" |]
                     }
                 |]
@@ -58,6 +53,7 @@ let Test1 () =
                 CoolDown = TimeSpan.FromSeconds(300.)
                 WarmupCycles = Some 2
                 Cycles = 3
+                Settings = None
                 Exercises =
                     [|
                         Exercise.ExerciseDuration("Ex1")
@@ -66,7 +62,7 @@ let Test1 () =
             }
         |]
 
-    let actual = convertConfig xx
+    let actual = convertConfig config
 
     Assert.AreEqual(expected, actual)
     ()

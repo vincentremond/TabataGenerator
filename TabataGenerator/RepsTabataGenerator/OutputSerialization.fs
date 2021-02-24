@@ -6,7 +6,6 @@ open RepsTabataGenerator.OutputFileFormat
 
 type IntervalJsonConverter() =
     inherit JsonConverter()
-//    new() = IntervalJsonConverter()
     override _.CanConvert(t) = t = typeof<Interval>
     override _.ReadJson(_, _, _, _) = raise (NotImplementedException())
     override _.WriteJson(writer, value, _) =

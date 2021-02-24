@@ -2,8 +2,6 @@
 
 open System
 open System.Collections.Generic
-open System.Runtime.Serialization
-open System.Text.Json.Serialization
 open Newtonsoft.Json
 open RepsTabataGenerator.Model
 open RepsTabataGenerator.WorkoutIntervalExpander
@@ -54,7 +52,7 @@ module OutputFileFormat =
             restDescription: string
             restReps: int
             [<JsonProperty(NullValueHandling = NullValueHandling.Ignore)>]
-            settings: Dictionary<string, string>
+            settings: IDictionary<string, string>
             skipLastRestInterval: bool
             skipPrepareAndCoolDownBetweenWorkouts: bool
             tabatasCount: int
@@ -157,7 +155,10 @@ module OutputFileFormat =
             restBpm = 0
             restDescription = null
             restReps = 0
-            settings = null
+            settings =
+                match workout.Settings with
+                | Some arr -> (arr |> dict)
+                | None -> null
             skipLastRestInterval = true
             skipPrepareAndCoolDownBetweenWorkouts = false
             tabatasCount = 1
