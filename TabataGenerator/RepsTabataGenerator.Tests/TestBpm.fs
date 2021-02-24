@@ -1,18 +1,18 @@
 ﻿module RepsTabataGenerator.Tests.TestBpm
 
-open System
 open NUnit.Framework
+open RepsTabataGenerator.Model
 open RepsTabataGenerator.WorkoutIntervalExpander
 
 [<Test>]
 let Test1 () =
     let Test1' bpm duration bpmAdjust expected =
         let repsCount =
-            getRepsCount bpm (TimeSpan.Parse(duration)) bpmAdjust
+            getRepsCount bpm duration bpmAdjust
 
         Assert.AreEqual(expected, repsCount)
 
-    Test1' 60 "00:01:00" 1.0 60
-    Test1' 60 "00:01:00" 0.5 30
-    Test1' 4 "00:00:15" 1.0 1
-    Test1' 4 "00:00:16" 1.0 2
+    Test1' 60.<reps/min> 60.<sec> 1.0 60
+    Test1' 60.<reps/min> 60.<sec> 0.5 30
+    Test1' 4.<reps/min> 15.<sec> 1.0 1
+    Test1' 4.<reps/min> 16.<sec> 1.0 2

@@ -12,34 +12,34 @@ module EntryPoint =
 
     let hiitMachine =
         {
-            Warmup = duration (7<min> |%| 30<sec>)
+            Warmup = duration (7.<min> |%| 30.<sec>)
             WarmupCycles = Some 0
             Cycles = 16
-            Work = duration 30<sec>
-            Rest = duration 30<sec>
-            Recovery = duration 30<sec>
-            CoolDown = duration 30<sec>
+            Work = duration 30.<sec>
+            Rest = duration 30.<sec>
+            Recovery = duration 30.<sec>
+            CoolDown = duration 30.<sec>
         }
         
     let hiit =
         {
-         Warmup = duration 20<sec>
+         Warmup = duration 20.<sec>
          WarmupCycles = Some 2
          Cycles = 5
-         Work = duration 25<sec>
-         Rest = duration 35<sec>
-         Recovery = duration 35<sec>
-         CoolDown = duration (3<min> |%| 0<sec>)
+         Work = duration 25.<sec>
+         Rest = duration 35.<sec>
+         Recovery = duration 35.<sec>
+         CoolDown = duration (3.<min> |%| 0.<sec>)
      }
         
     let circuitTraining = {
-                     Warmup = duration 20<sec>
+                     Warmup = duration 20.<sec>
                      WarmupCycles = Some 2
                      Cycles = 5
-                     Work = duration 30<sec>
-                     Rest = duration 4<sec>
-                     Recovery = duration (1<min> |%| 15<sec>)
-                     CoolDown = duration (3<min> |%| 0<sec>)
+                     Work = duration 30.<sec>
+                     Rest = duration 4.<sec>
+                     Recovery = duration (1.<min> |%| 15.<sec>)
+                     CoolDown = duration (3.<min> |%| 0.<sec>)
                  }
 
     let config =
@@ -48,62 +48,62 @@ module EntryPoint =
                 [|
                     {
                         Name = "Bear plank"
-                        BPM = 30
+                        BPM = 30.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Break dancer"
-                        BPM = 30
+                        BPM = 30.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Burpees"
-                        BPM = 17
+                        BPM = 17.<reps/min>
                         GIF = "https://pas-bien.net/divers/tabata/burpees.gif"
                     }
                     {
                         Name = "Jumping jack"
-                        BPM = 120
+                        BPM = 120.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Montées de genoux"
-                        BPM = 135
+                        BPM = 135.<reps/min>
                         GIF = "https://pas-bien.net/divers/tabata/montees-genoux.gif"
                     }
                     {
                         Name = "Mountain climbers"
-                        BPM = 100
+                        BPM = 100.<reps/min>
                         GIF = "https://pas-bien.net/divers/tabata/montain-climbers.gif"
                     }
                     {
                         Name = "Pompes en T"
-                        BPM = 12
+                        BPM = 12.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Skater"
-                        BPM = 60
+                        BPM = 60.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Squat foot touch"
-                        BPM = 22
+                        BPM = 22.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Squats sautés"
-                        BPM = 40
+                        BPM = 40.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Step up"
-                        BPM = 30
+                        BPM = 30.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                     {
                         Name = "Coude genoux"
-                        BPM = 30
+                        BPM = 30.<reps/min>
                         GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
                     }
                 |]
@@ -162,13 +162,13 @@ module EntryPoint =
                             ("key_workout_sound_last_seconds_work", "value_sound_glass")
                         |]
                         Template = {
-                                    Warmup = duration 30<sec>
+                                    Warmup = duration 30.<sec>
                                     WarmupCycles = None
                                     Cycles = 6
-                                    Work = duration 30<sec>
-                                    Rest = duration 22<sec>
-                                    Recovery = duration 22<sec>
-                                    CoolDown = duration 22<sec>
+                                    Work = duration 30.<sec>
+                                    Rest = duration 22.<sec>
+                                    Recovery = duration 22.<sec>
+                                    CoolDown = duration 22.<sec>
                                 }
                         Exercises = [| "Hold" |]
                     }
@@ -179,13 +179,13 @@ module EntryPoint =
                         Settings = None
                         Template =
                                 {
-                                    Warmup = duration 10<sec>
+                                    Warmup = duration 10.<sec>
                                     WarmupCycles = None
                                     Cycles = 1
-                                    Work = duration (15<min> |%| 30<sec>)
-                                    Rest = duration 10<sec>
-                                    Recovery = duration 10<sec>
-                                    CoolDown = duration 10<sec>
+                                    Work = duration (15.<min> |%| 30.<sec>)
+                                    Rest = duration 10.<sec>
+                                    Recovery = duration 10.<sec>
+                                    CoolDown = duration 10.<sec>
                                 }
                         Exercises = [| "~~~~" |]
                     }

@@ -1,6 +1,5 @@
 ﻿namespace RepsTabataGenerator
 
-open System
 open System.Collections.Generic
 open Newtonsoft.Json
 open RepsTabataGenerator.Model
@@ -76,9 +75,7 @@ module OutputFileFormat =
             versionName: string
         }
 
-    let seconds (duration: Duration): int =
-        let d = duration.TotalSeconds
-        Convert.ToInt32(Math.Ceiling(d))
+    let asInt<[<Measure>]'u>(x: float<'u>): int = (int (ceiling( float x))) 
 
     let private intervalDuration duration intervalType (description: Option<Label>) =
         {
@@ -90,7 +87,7 @@ module OutputFileFormat =
             reps = 0
             tabata = -1
             tabatasCount = -1
-            time = seconds duration
+            time = duration |> asInt
             intervalType = intervalType
             description =
                 match description with
@@ -102,11 +99,11 @@ module OutputFileFormat =
     let private intervalReps intervalType (bpm: BPM) (reps: Reps) description url =
         {
             addSet = false
-            bpm = bpm
+            bpm = bpm |> asInt
             cycle = -1
             cyclesCount = -1
             isRepsMode = true
-            reps = reps
+            reps = reps |> asInt
             tabata = -1
             tabatasCount = -1
             time = 10

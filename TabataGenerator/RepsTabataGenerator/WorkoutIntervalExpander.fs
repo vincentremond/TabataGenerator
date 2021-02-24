@@ -23,14 +23,12 @@ module WorkoutIntervalExpander =
             Settings: Settings
         }
 
-    let getRepsCount bpm (duration: Duration) bpmAdjust: Reps =
-        Convert.ToInt32
-            (Math.Ceiling
-                (bpmAdjust * (float bpm) * duration.TotalSeconds
-                 / 60.))
+    let getRepsCount (bpm: BPM) (duration: Duration) (bpmAdjust: float): Reps =
+        bpm * (secondsToMinutes duration) * bpmAdjust
+            |> ceiling
 
     let createRepsInterval label (bpm: BPM) gif duration bpmAdjust =
-        DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), bpm, gif)
+        DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), (bpm * bpmAdjust), gif)
 
     let private createLabel pre exi exc cyi cyc lab =
         $"{pre}\n[Ex. {exi}/{exc} • Cycle {cyi}/{cyc}]\n{lab}"
@@ -66,6 +64,7 @@ module WorkoutIntervalExpander =
                 match description.WarmupCycles with
                 | Some warmup ->
                     let cyc = warmup
+
                     for cyi = 1 to cyc do
                         for (exi, exercise) in (description.Exercises |> mapi) do
                             yield createInterval exercise "Warmup" exi exc cyi cyc description.Work 0.75
@@ -74,6 +73,7 @@ module WorkoutIntervalExpander =
                 | _ -> ()
 
                 let cyc = description.Cycles
+
                 for cyi = 1 to cyc do
                     for (exi, exercise) in (description.Exercises |> mapi) do
                         yield createInterval exercise "" exi exc cyi cyc description.Work 1.0
@@ -90,7 +90,11 @@ module WorkoutIntervalExpander =
 
         description.Notes
         + "\n\nExercises:\n"
-        + (String.Join("\n", description.Exercises |> Seq.map getExLabel |> Seq.map (fun l -> $"• {l}")))
+        + (String.Join
+            ("\n",
+             description.Exercises
+             |> Seq.map getExLabel
+             |> Seq.map (fun l -> $"• {l}")))
 
     let create (description: WorkoutSimpleDescription): DetailedWorkout =
         {

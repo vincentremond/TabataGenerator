@@ -1,7 +1,7 @@
 ﻿module RepsTabataGenerator.Tests.WorkoutConfigurationConverterTest
 
-open System
 open NUnit.Framework
+open RepsTabataGenerator.Model
 open RepsTabataGenerator.Configuration
 open RepsTabataGenerator.WorkoutConfigurationConverter
 
@@ -13,7 +13,7 @@ let Test1 () =
                 [|
                     {
                         Name = "Ex2"
-                        BPM = 180
+                        BPM = 180.<reps/min>
                         GIF = "https://ex2.gif"
                     }
                 |]
@@ -25,13 +25,13 @@ let Test1 () =
                         Notes = "Notes"
                         Template =
                             {
-                                Warmup = TimeSpan.FromSeconds(15.)
+                                Warmup = 15.<sec>
                                 WarmupCycles = Some 2
                                 Cycles = 3
-                                Work = TimeSpan.FromSeconds(30.)
-                                Rest = TimeSpan.FromSeconds(5.)
-                                Recovery = TimeSpan.FromSeconds(60.)
-                                CoolDown = TimeSpan.FromSeconds(300.)
+                                Work = 30.<sec>
+                                Rest = 5.<sec>
+                                Recovery = 60.<sec>
+                                CoolDown = 300.<sec>
                             }
                         Settings = None
                         Exercises = [| "Ex1"; "Ex2" |]
@@ -46,18 +46,18 @@ let Test1 () =
                 Id = 1
                 Title = "Title"
                 Notes = "Notes"
-                Warmup = TimeSpan.FromSeconds(15.)
-                Work = TimeSpan.FromSeconds(30.)
-                Rest = TimeSpan.FromSeconds(5.)
-                Recovery = TimeSpan.FromSeconds(60.)
-                CoolDown = TimeSpan.FromSeconds(300.)
+                Warmup = 15.<sec>
+                Work = 30.<sec>
+                Rest = 5.<sec>
+                Recovery = 60.<sec>
+                CoolDown = 300.<sec>
                 WarmupCycles = Some 2
                 Cycles = 3
                 Settings = None
                 Exercises =
                     [|
                         Exercise.ExerciseDuration("Ex1")
-                        Exercise.ExerciseReps("Ex2", 180, "https://ex2.gif")
+                        Exercise.ExerciseReps("Ex2", 180.<reps/min>, "https://ex2.gif")
                     |]
             }
         |]
