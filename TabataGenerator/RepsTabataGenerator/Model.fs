@@ -1,6 +1,7 @@
 ﻿module RepsTabataGenerator.Model
 
 open System
+open Microsoft.FSharp.Core.LanguagePrimitives
 
 [<Measure>]
 type sec
@@ -8,15 +9,21 @@ type sec
 [<Measure>]
 type min
 
-let inline (|%|) (m:int<min>) (s:int<sec>) : int<sec> = (m * 60<sec> / 1<min> + s)
-type Duration = TimeSpan
+[<Measure>]
+type reps
 
-let duration (s:int<sec>):Duration = TimeSpan.FromSeconds((float) s)
+let inline (|%|) (m:float<min>) (s:float<sec>) : float<sec> = (m * 60.<sec> / 1.<min> + s)
+type Duration = float<sec>
 
-type Reps = int
+let duration (s:float<sec>):Duration = s
+let secondsToMinutes (s:float<sec>):float<min> = s * 1.<min> / 60.<sec>  
+let ceiling<[<Measure>]'u>(x: float<'u>): float<'u> = Math.Ceiling(float x) |> FloatWithMeasure
+
+
+type Reps = float<reps>
 type Label = string
 type TemplateId = string
 type GIF = string
-type BPM = int
+type BPM = float<reps/min>
 
 type Settings = (string * string) array option
