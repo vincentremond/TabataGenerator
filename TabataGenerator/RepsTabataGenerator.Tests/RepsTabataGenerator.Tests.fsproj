@@ -7,7 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="paket.references" />
-    <Compile Include="WorkoutConfigurationConverterTest.fs" />
     <Compile Include="WorkoutIntervalExpanderTest.fs" />
     <Compile Include="TestBpm.fs" />
     <Compile Include="TestLabel.fs" />

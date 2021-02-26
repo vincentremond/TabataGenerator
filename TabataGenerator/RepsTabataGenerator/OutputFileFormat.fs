@@ -1,5 +1,6 @@
 ﻿namespace RepsTabataGenerator
 
+open System
 open System.Collections.Generic
 open Newtonsoft.Json
 open RepsTabataGenerator.Model
@@ -165,6 +166,15 @@ module OutputFileFormat =
             workReps = 0
         }
 
+    type IntervalJsonConverter() =
+        inherit JsonConverter()
+        override _.CanConvert(t) = t = typeof<Interval>
+        override _.ReadJson(_, _, _, _) = raise (NotImplementedException())
+        override _.WriteJson(writer, value, _) =
+            let settings = JsonSerializerSettings(Formatting = Formatting.None)
+            let rawValue = JsonConvert.SerializeObject(value, settings)
+            writer.WriteRawValue rawValue
+
     let createResult (workouts: DetailedWorkout array) =
         {
             settings = obj
@@ -177,3 +187,10 @@ module OutputFileFormat =
             versionCode = 502002
             versionName = "5.2.2"
         }
+
+    let serialize obj =
+        let settings =
+            JsonSerializerSettings(Formatting = Formatting.Indented)
+
+        settings.Converters.Add(new IntervalJsonConverter())
+        JsonConvert.SerializeObject(obj, settings)

@@ -2,7 +2,7 @@
 
 open FsUnit
 open NUnit.Framework
-open RepsTabataGenerator.LabelFactory
+open RepsTabataGenerator.WorkoutIntervalExpander
 
 [<Test>]
 let Test1 () =

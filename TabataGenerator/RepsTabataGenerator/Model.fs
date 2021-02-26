@@ -15,7 +15,6 @@ type reps
 let inline (|%|) (m:float<min>) (s:float<sec>) : float<sec> = (m * 60.<sec> / 1.<min> + s)
 type Duration = float<sec>
 
-let duration (s:float<sec>):Duration = s
 let secondsToMinutes (s:float<sec>):float<min> = s * 1.<min> / 60.<sec>  
 let ceiling<[<Measure>]'u>(x: float<'u>): float<'u> = Math.Ceiling(float x) |> FloatWithMeasure
 

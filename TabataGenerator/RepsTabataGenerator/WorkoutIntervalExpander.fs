@@ -1,10 +1,8 @@
 ﻿namespace RepsTabataGenerator
 
 open System
-open RepsTabataGenerator
+open RepsTabataGenerator.Configuration
 open RepsTabataGenerator.Model
-open RepsTabataGenerator.LabelFactory
-open RepsTabataGenerator.WorkoutConfigurationConverter
 
 module WorkoutIntervalExpander =
 
@@ -32,8 +30,24 @@ module WorkoutIntervalExpander =
     let createRepsInterval label (bpm: BPM) gif duration bpmAdjust =
         DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), (bpm * bpmAdjust), gif)
 
+    let createLabel (pre: string) (exi: int) (exc: int) (cyi: int) (cyc: int) (acy: int option) (lab: string): string =
+        let cycle i c a =
+            match a with
+            | Some a -> $"Cycle {i}/{c}+{a}"
+            | None -> $"Cycle {i}/{c}"
+
+        let exercise i c = $"Ex. {i}/{c}"
+
+        let middlePart =
+            match (exc, cyc) with
+            | (1, _) -> (cycle cyi cyc acy)
+            | (_, 1) -> (exercise exi exc)
+            | (_, _) -> (exercise exi exc) + " • " + (cycle cyi cyc acy)
+
+        $"{pre}\n[{middlePart}]\n{lab}"
+
     let createInterval ex pre exi exc cyi cyc acy d bpmAdjust: DetailedInterval =
-        let createLabel' lab = LabelFactory.createLabel pre exi exc cyi cyc acy lab
+        let createLabel' lab = createLabel pre exi exc cyi cyc acy lab
 
         match ex with
         | ExerciseDuration (l) -> DetailedInterval.WorkDuration((createLabel' l), d)
@@ -47,26 +61,26 @@ module WorkoutIntervalExpander =
         let lastCycle = cyi = cyc
         let lastExercise = exi = exc
 
-        match (lastExercise, lastCycle, warmup, description.CoolDown) with
-        | (false, _, _, _) -> Some(DetailedInterval.Rest description.Rest)
-        | (true, true, true, _) -> Some(DetailedInterval.Recovery description.Recovery)
-        | (true, false, _, _) -> Some(DetailedInterval.Recovery description.Recovery)
+        match (lastExercise, lastCycle, warmup, description.Template.CoolDown) with
+        | (false, _, _, _) -> Some(DetailedInterval.Rest description.Template.Rest)
+        | (true, true, true, _) -> Some(DetailedInterval.Recovery description.Template.Recovery)
+        | (true, false, _, _) -> Some(DetailedInterval.Recovery description.Template.Recovery)
         | (true, true, false, Some d) -> Some(DetailedInterval.CoolDown d)
         | (true, true, false, None) -> None
 
-    let createIntervals (description: WorkoutSimpleDescription): DetailedInterval array =
-        let rec createIntervals' (description: WorkoutSimpleDescription): seq<DetailedInterval> =
+    let createIntervals (description: Workout): DetailedInterval array =
+        let rec createIntervals' (description: Workout): seq<DetailedInterval> =
             seq {
-                yield DetailedInterval.Prepare(description.Warmup)
+                yield DetailedInterval.Prepare(description.Template.Warmup)
 
                 let exc = description.Exercises.Length
 
-                match description.WarmupCycles with
+                match description.Template.WarmupCycles with
                 | Some warmup ->
                     let cyc = warmup
                     for cyi = 1 to cyc do
                         for (exi, exercise) in (description.Exercises |> mapi) do
-                            yield createInterval exercise "Warmup" exi exc cyi cyc (Some description.Cycles) description.Work 0.75
+                            yield createInterval exercise "Warmup" exi exc cyi cyc (Some description.Template.Cycles) description.Template.Work 0.75
 
                             match postExerciseInterval true exi exc cyi cyc description with
                             | Some x -> yield x
@@ -74,10 +88,10 @@ module WorkoutIntervalExpander =
 
                 | _ -> ()
 
-                let cyc = description.Cycles
+                let cyc = description.Template.Cycles
                 for cyi = 1 to cyc do
                     for (exi, exercise) in (description.Exercises |> mapi) do
-                        yield createInterval exercise "" exi exc cyi cyc None description.Work 1.0
+                        yield createInterval exercise "" exi exc cyi cyc None description.Template.Work 1.0
 
                         match postExerciseInterval false exi exc cyi cyc description with
                         | Some x -> yield x
@@ -86,7 +100,7 @@ module WorkoutIntervalExpander =
 
         description |> createIntervals' |> Seq.toArray
 
-    let private getNotes (description: WorkoutSimpleDescription) =
+    let private getNotes (description: Workout) =
         let getExLabel ex =
             match ex with
             | ExerciseDuration l -> l
@@ -100,7 +114,7 @@ module WorkoutIntervalExpander =
              |> Seq.map getExLabel
              |> Seq.map (fun l -> $"• {l}")))
 
-    let create (description: WorkoutSimpleDescription): DetailedWorkout =
+    let create (description: Workout): DetailedWorkout =
         {
             Id = description.Id
             Title = description.Title

@@ -10,61 +10,75 @@ module EntryPoint =
     let writeToFile path contents =
         System.IO.File.WriteAllText(path, contents)
 
-    let hiitMachine =
-        {
-            Warmup = duration (7.<min> |%| 30.<sec>)
-            WarmupCycles = Some 0
-            Cycles = 16
-            Work = duration 30.<sec>
-            Rest = duration 30.<sec>
-            Recovery = duration 30.<sec>
-            CoolDown = Some (duration 30.<sec>)
-        }
+    type ExDesc = {
+        Name: Label
+        BPM: BPM
+        GIF: GIF
+    }        
 
-    let hiit =
-        {
-            Warmup = duration 20.<sec>
-            WarmupCycles = Some 2
-            Cycles = 5
-            Work = duration 25.<sec>
-            Rest = duration 35.<sec>
-            Recovery = duration 35.<sec>
-            CoolDown = Some (duration (3.<min> |%| 0.<sec>))
-        }
+    [<EntryPoint>]
+    let main _ =
 
-    let circuitTraining =
-        {
-            Warmup = duration 20.<sec>
-            WarmupCycles = Some 2
-            Cycles = 5
-            Work = duration 30.<sec>
-            Rest = duration 4.<sec>
-            Recovery = duration (1.<min> |%| 15.<sec>)
-            CoolDown = Some (duration (3.<min> |%| 0.<sec>))
-        }
+        let exercises = [|
+            { Name = "Bear plank" ; BPM = 42.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Break dancer" ; BPM = 23.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Burpees" ; BPM = 17.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/burpees.gif" }
+            { Name = "Jumping jack" ; BPM = 120.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Montées de genoux" ; BPM = 135.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/montees-genoux.gif" }
+            { Name = "Mountain climbers" ; BPM = 100.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/montain-climbers.gif" }
+            { Name = "Pompes en T" ; BPM = 12.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Skater" ; BPM = 40.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Squat foot touch" ; BPM = 22.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Squats sautés" ; BPM = 40.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Step up" ; BPM = 30.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Coude genoux" ; BPM = 30.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+        |] 
 
-    let config =
-        {
-            Exercises =
-                [|
-                    { Name = "Bear plank" ; BPM = 42.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Break dancer" ; BPM = 23.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Burpees" ; BPM = 17.<reps/min> ; GIF = "https://pas-bien.net/divers/tabata/burpees.gif" }
-                    { Name = "Jumping jack" ; BPM = 120.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Montées de genoux" ; BPM = 135.<reps/min> ; GIF = "https://pas-bien.net/divers/tabata/montees-genoux.gif" }
-                    { Name = "Mountain climbers" ; BPM = 100.<reps/min> ; GIF = "https://pas-bien.net/divers/tabata/montain-climbers.gif" }
-                    { Name = "Pompes en T" ; BPM = 12.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Skater" ; BPM = 40.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Squat foot touch" ; BPM = 22.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Squats sautés" ; BPM = 40.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Step up" ; BPM = 30.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                    { Name = "Coude genoux" ; BPM = 30.<reps/min> ; GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-                |]
-            Workouts =
-                [|
+        let asEx input =
+            let findEx s =
+                match exercises |> Seq.filter (fun e -> e.Name = s) |> Seq.tryExactlyOne with
+                | Some e -> Exercise.ExerciseReps (e.Name, e.BPM, e.GIF)
+                | None -> Exercise.ExerciseDuration (s)
+                        
+            input |> Array.map findEx
+            
+        let hiitMachine =
+            {
+                Warmup = (7.<min> |%| 30.<sec>)
+                WarmupCycles = Some 0
+                Cycles = 16
+                Work = 30.<sec>
+                Rest = 30.<sec>
+                Recovery = 30.<sec>
+                CoolDown = Some (30.<sec>)
+            }
+
+        let hiit =
+            {
+                Warmup = 20.<sec>
+                WarmupCycles = Some 2
+                Cycles = 5
+                Work = 25.<sec>
+                Rest = 35.<sec>
+                Recovery = 35.<sec>
+                CoolDown = Some (3.<min> |%| 0.<sec>)
+            }
+
+        let circuitTraining =
+            {
+                Warmup = 20.<sec>
+                WarmupCycles = Some 2
+                Cycles = 5
+                Work = 30.<sec>
+                Rest = 4.<sec>
+                Recovery = (1.<min> |%| 15.<sec>)
+                CoolDown = Some (3.<min> |%| 0.<sec>)
+            }
+
+        [|
                     {
                         Id = 101
-                        Name = "Poids du corps 1 (new)"
+                        Title = "Poids du corps 1 (new)"
                         Notes = "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38"
                         Template = hiit
                         Settings = None
@@ -74,11 +88,11 @@ module EntryPoint =
                                 "Montées de genoux"
                                 "Pompes en T"
                                 "Burpees"
-                            |]
+                            |] |> asEx
                     }
                     {
                         Id = 102
-                        Name = "Poids du corps 4 (new)"
+                        Title = "Poids du corps 4 (new)"
                         Notes = "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-49"
                         Template = { hiit with Cycles = 4 }
                         Settings = None
@@ -89,11 +103,11 @@ module EntryPoint =
                                 "Step up"
                                 "Break dancer"
                                 "Step up"
-                            |]
+                            |] |> asEx
                     }
                     {
                         Id = 103
-                        Name = "Poids du corps 2 (old)"
+                        Title = "Poids du corps 2 (old)"
                         Notes = "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12"
                         Template = hiit
                         Settings = None
@@ -103,11 +117,11 @@ module EntryPoint =
                                 "Montées de genoux"
                                 "Mountain climbers"
                                 "Jumping jack"
-                            |]
+                            |] |> asEx
                     }
                     {
                         Id = 200
-                        Name = "Vacuum"
+                        Title = "Vacuum"
                         Notes = ""
                         Settings =
                             Some [| ("key_workout_sound_time", "12")
@@ -115,44 +129,37 @@ module EntryPoint =
                                     ("key_workout_sound_last_seconds_work", "value_sound_glass") |]
                         Template =
                             {
-                                Warmup = duration 30.<sec>
+                                Warmup = 30.<sec>
                                 WarmupCycles = None
                                 Cycles = 6
-                                Work = duration 30.<sec>
-                                Rest = duration 25.<sec>
-                                Recovery = duration 25.<sec>
+                                Work = 30.<sec>
+                                Rest = 25.<sec>
+                                Recovery = 25.<sec>
                                 CoolDown = None
                             }
-                        Exercises = [| "Hold" |]
+                        Exercises = [| "Hold" |] |> asEx
                     }
                     {
                         Id = 300
-                        Name = "Méditation"
+                        Title = "Méditation"
                         Notes = ""
                         Settings = None
                         Template =
                             {
-                                Warmup = duration 10.<sec>
+                                Warmup = 10.<sec>
                                 WarmupCycles = None
                                 Cycles = 1
-                                Work = duration (15.<min> |%| 30.<sec>)
-                                Rest = duration 10.<sec>
-                                Recovery = duration 10.<sec>
-                                CoolDown = Some (duration 10.<sec>)
+                                Work = (15.<min> |%| 30.<sec>)
+                                Rest = 10.<sec>
+                                Recovery = 10.<sec>
+                                CoolDown = Some (10.<sec>)
                             }
-                        Exercises = [| "~~~~" |]
+                        Exercises = [| "~~~~" |] |> asEx
                     }
                 |]
-        }
-
-    [<EntryPoint>]
-    let main argv =
-
-        config
-        |> WorkoutConfigurationConverter.convertConfig
         |> Array.map WorkoutIntervalExpander.create
         |> OutputFileFormat.createResult
-        |> OutputSerialization.serialize
+        |> OutputFileFormat.serialize
         |> writeToFile "result.workout"
 
         printfn "Done, written to file"
