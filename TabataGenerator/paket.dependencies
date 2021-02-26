@@ -2,12 +2,10 @@ source https://api.nuget.org/v3/index.json
 
 storage: none
 framework: net5.0
-nuget Chiron
 nuget FSharp.Configuration
+nuget FsUnit
 nuget Microsoft.NET.Test.Sdk
 nuget Microsoft.Toolkit.Parsers
 nuget nunit
 nuget NUnit3TestAdapter
-nuget ObjectDumper.NET
-nuget YamlDotNet
 nuget FSharp.Data
