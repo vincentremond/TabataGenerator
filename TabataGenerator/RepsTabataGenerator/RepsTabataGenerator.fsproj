@@ -8,11 +8,9 @@
     <Content Include="paket.references" />
     <Compile Include="Model.fs" />
     <Compile Include="Configuration.fs" />
-    <Compile Include="WorkoutConfigurationConverter.fs" />
     <Compile Include="LabelFactory.fs" />
     <Compile Include="WorkoutIntervalExpander.fs" />
     <Compile Include="OutputFileFormat.fs" />
-    <Compile Include="OutputSerialization.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />

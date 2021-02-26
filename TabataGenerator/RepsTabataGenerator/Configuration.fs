@@ -14,21 +14,17 @@ module Configuration =
             Recovery: Duration
             CoolDown: Duration option
         }
-
-    type Exercise = { Name: Label; BPM: BPM; GIF: GIF }
+    
+    type Exercise =
+        | ExerciseDuration of Label
+        | ExerciseReps of Label * BPM * GIF
 
     type Workout =
         {
             Id: int
-            Name: Label
+            Title: Label
             Notes: string
             Template: Template
             Settings: Settings
-            Exercises: string array
-        }
-
-    type Config =
-        {
             Exercises: Exercise array
-            Workouts: Workout array
         }

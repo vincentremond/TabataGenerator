@@ -2,8 +2,8 @@ module RepsTabataGenerator.Tests.WorkoutIntervalExpanderTest
 
 open FsUnit
 open NUnit.Framework
+open RepsTabataGenerator.Configuration
 open RepsTabataGenerator.Model
-open RepsTabataGenerator.WorkoutConfigurationConverter
 open RepsTabataGenerator.WorkoutIntervalExpander
 
 [<Test>]
@@ -12,13 +12,15 @@ let Test1 () =
         Id = 1
         Title = "Title"
         Notes = "Notes"
-        Warmup = 15.<sec>
-        Work = 30.<sec>
-        Rest = 5.<sec>
-        Recovery = 60.<sec>
-        CoolDown = Some 300.<sec>
-        WarmupCycles = Some 2
-        Cycles = 3
+        Template = {
+            Warmup = 15.<sec>
+            Work = 30.<sec>
+            Rest = 5.<sec>
+            Recovery = 60.<sec>
+            CoolDown = Some 300.<sec>
+            WarmupCycles = Some 2
+            Cycles = 3
+        }
         Settings = None
         Exercises =
             [|
