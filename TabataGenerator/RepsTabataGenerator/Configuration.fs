@@ -12,7 +12,7 @@ module Configuration =
             Work: Duration
             Rest: Duration
             Recovery: Duration
-            CoolDown: Duration
+            CoolDown: Duration option
         }
 
     type Exercise = { Name: Label; BPM: BPM; GIF: GIF }

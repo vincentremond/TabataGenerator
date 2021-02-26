@@ -20,7 +20,7 @@ module WorkoutConfigurationConverter =
             Work: Duration
             Rest: Duration
             Recovery: Duration
-            CoolDown: Duration
+            CoolDown: Duration option
             Exercises: Exercise array
             Settings: Settings
         }
