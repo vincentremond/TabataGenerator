@@ -22,13 +22,13 @@ module EntryPoint =
         let exercises = [|
             { Name = "Bear plank" ; BPM = 42.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
             { Name = "Break dancer" ; BPM = 23.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-            { Name = "Burpees" ; BPM = 17.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/burpees.gif" }
-            { Name = "Jumping jack" ; BPM = 120.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-            { Name = "Montées de genoux" ; BPM = 135.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/montees-genoux.gif" }
+            { Name = "Burpees" ; BPM = 13.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/burpees.gif" }
+            { Name = "Jumping jack" ; BPM = 125.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Montées de genoux" ; BPM = 140.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/montees-genoux.gif" }
             { Name = "Mountain climbers" ; BPM = 100.<reps/min> ; GIF ="https://pas-bien.net/divers/tabata/montain-climbers.gif" }
-            { Name = "Pompes en T" ; BPM = 12.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Pompes en T" ; BPM = 13.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
             { Name = "Skater" ; BPM = 40.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
-            { Name = "Squat foot touch" ; BPM = 22.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
+            { Name = "Squat foot touch" ; BPM = 23.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
             { Name = "Squats sautés" ; BPM = 40.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
             { Name = "Step up" ; BPM = 30.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
             { Name = "Coude genoux" ; BPM = 30.<reps/min> ; GIF ="https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif" }
@@ -36,7 +36,7 @@ module EntryPoint =
 
         let asEx input =
             let findEx s =
-                match exercises |> Seq.filter (fun e -> e.Name = s) |> Seq.tryExactlyOne with
+                match (exercises |> Seq.filter (fun e -> e.Name = s) |> Seq.tryExactlyOne) with
                 | Some e -> Exercise.ExerciseReps (e.Name, e.BPM, e.GIF)
                 | None -> Exercise.ExerciseDuration (s)
                         
