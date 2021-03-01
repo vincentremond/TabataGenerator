@@ -80,7 +80,7 @@ module WorkoutIntervalExpander =
                     let cyc = warmup
                     for cyi = 1 to cyc do
                         for (exi, exercise) in (description.Exercises |> mapi) do
-                            yield createInterval exercise "Warmup" exi exc cyi cyc (Some description.Template.Cycles) description.Template.Work 0.75
+                            yield createInterval exercise "Warmup" exi exc cyi cyc (Some description.Template.Cycles) description.Template.Work 0.80
 
                             match postExerciseInterval true exi exc cyi cyc description with
                             | Some x -> yield x
