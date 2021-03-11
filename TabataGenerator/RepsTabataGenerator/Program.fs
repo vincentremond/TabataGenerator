@@ -120,6 +120,26 @@ module EntryPoint =
                             |] |> asEx
                     }
                     {
+                        Id = 150
+                        Title = "Course"
+                        Notes = ""
+                        Template = 
+                            {
+                                Warmup = 7.<min> |%| 0.<sec>
+                                WarmupCycles = None
+                                Cycles = 15
+                                Work = 30.<sec>
+                                Rest = 30.<sec>
+                                Recovery = 30.<sec>
+                                CoolDown = Some (5.<min> |%| 0.<sec>)
+                            }
+                        Settings = None
+                        Exercises =
+                            [|
+                                "Effort max"
+                            |] |> asEx
+                    }
+                    {
                         Id = 200
                         Title = "Vacuum"
                         Notes = ""
