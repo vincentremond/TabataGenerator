@@ -114,22 +114,13 @@ module OutputFileFormat =
         }
 
     let private getIntervals (interval: DetailedInterval): Interval =
-        let t =
-            match interval with
-            | DetailedInterval.Prepare _ -> 0
-            | DetailedInterval.WorkDuration _ -> 1
-            | DetailedInterval.WorkReps _ -> 1
-            | DetailedInterval.Rest _ -> 2
-            | DetailedInterval.Recovery _ -> 3
-            | DetailedInterval.CoolDown _ -> 4
-
         match interval with
-        | DetailedInterval.Prepare d -> intervalDuration d t None
-        | DetailedInterval.WorkDuration (label, duration) -> intervalDuration duration t (Some label)
-        | DetailedInterval.WorkReps (label, reps, bpm, gif) -> intervalReps t bpm reps label gif
-        | DetailedInterval.Rest d -> intervalDuration d t None
-        | DetailedInterval.Recovery d -> intervalDuration d t None
-        | DetailedInterval.CoolDown d -> intervalDuration d t None
+        | DetailedInterval.Prepare d -> intervalDuration d 0 None
+        | DetailedInterval.WorkDuration (label, duration) -> intervalDuration duration 1 (Some label)
+        | DetailedInterval.WorkReps (label, reps, bpm, gif) -> intervalReps 1 bpm reps label gif
+        | DetailedInterval.Rest d -> intervalDuration d 2 None
+        | DetailedInterval.Recovery d -> intervalDuration d 3 None
+        | DetailedInterval.CoolDown d -> intervalDuration d 4 None
 
     let private getWorkout (workout: DetailedWorkout): Workout =
         {
