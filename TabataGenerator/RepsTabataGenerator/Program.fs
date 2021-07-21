@@ -10,73 +10,29 @@ module EntryPoint =
     let writeToFile path contents =
         System.IO.File.WriteAllText(path, contents)
 
-    type ExDesc = { Name: Label; BPM: BPM; GIF: GIF }
 
     [<EntryPoint>]
     let main _ =
 
+        let defaultSpinnerGif =
+            "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
+
         let exercises =
             [|
-                {
-                    Name = "Bear plank"
-                    BPM = 42.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Break dancer"
-                    BPM = 23.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Burpees"
-                    BPM = 13.<reps/min>
-                    GIF = "https://pas-bien.net/divers/tabata/burpees.gif"
-                }
-                {
-                    Name = "Jumping jack"
-                    BPM = 125.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Montées de genoux"
-                    BPM = 140.<reps/min>
-                    GIF = "https://pas-bien.net/divers/tabata/montees-genoux.gif"
-                }
-                {
-                    Name = "Mountain climbers"
-                    BPM = 100.<reps/min>
-                    GIF = "https://pas-bien.net/divers/tabata/montain-climbers.gif"
-                }
-                {
-                    Name = "Pompes en T"
-                    BPM = 13.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Skater"
-                    BPM = 40.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Squat foot touch"
-                    BPM = 23.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Squats sautés"
-                    BPM = 40.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Step up"
-                    BPM = 30.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
-                {
-                    Name = "Coude genoux"
-                    BPM = 30.<reps/min>
-                    GIF = "https://media.giphy.com/media/2WjpfxAI5MvC9Nl8U7/giphy.gif"
-                }
+                ExerciseWithReps.mk "Bear plank" 42.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Break dancer" 23.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Burpees" 13.<reps/min> "https://pas-bien.net/divers/tabata/burpees.gif"
+                ExerciseWithReps.mk "Jumping jack" 125.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Montées de genoux" 140.<reps/min> "https://pas-bien.net/divers/tabata/montees-genoux.gif"
+                ExerciseWithReps.mk "Mountain climbers" 100.<reps/min> "https://pas-bien.net/divers/tabata/montain-climbers.gif"
+                ExerciseWithReps.mk "Pompes en T" 13.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Skater" 40.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Squat foot touch" 23.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Squats sautés" 40.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Step up" 30.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Coude genoux" 30.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Elliptique (high)" 110.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Elliptique (low)" 90.<reps/min> defaultSpinnerGif
             |]
 
         let asEx input =
@@ -84,20 +40,20 @@ module EntryPoint =
                 match (exercises
                        |> Seq.filter (fun e -> e.Name = s)
                        |> Seq.tryExactlyOne) with
-                | Some e -> Exercise.ExerciseReps(e.Name, e.BPM, e.GIF)
-                | None -> Exercise.ExerciseDuration(s)
+                | Some e -> ExerciseReps e
+                | None -> ExerciseDuration s
 
             input |> Array.map findEx
 
         let hiitMachine =
             {
                 Warmup = (7.<min> |%| 30.<sec>)
-                WarmupCycles = Some 0
+                WarmupCycles = None
                 Cycles = 16
                 Work = 30.<sec>
-                Rest = 30.<sec>
-                Recovery = 30.<sec>
-                CoolDown = Some(30.<sec>)
+                Rest = 30.<sec> |> Some
+                Recovery = 30.<sec> |> Some
+                CoolDown = 30.<sec> |> Some
             }
 
         let hiit =
@@ -106,9 +62,9 @@ module EntryPoint =
                 WarmupCycles = Some 2
                 Cycles = 5
                 Work = 25.<sec>
-                Rest = 35.<sec>
-                Recovery = 35.<sec>
-                CoolDown = Some(3.<min> |%| 0.<sec>)
+                Rest = 35.<sec> |> Some
+                Recovery = 35.<sec> |> Some
+                CoolDown = (3.<min> |%| 0.<sec>) |> Some
             }
 
         let circuitTraining =
@@ -117,9 +73,9 @@ module EntryPoint =
                 WarmupCycles = Some 2
                 Cycles = 5
                 Work = 30.<sec>
-                Rest = 4.<sec>
-                Recovery = (1.<min> |%| 15.<sec>)
-                CoolDown = Some(3.<min> |%| 0.<sec>)
+                Rest = 4.<sec> |> Some
+                Recovery = (1.<min> |%| 15.<sec>) |> Some
+                CoolDown = (3.<min> |%| 0.<sec>) |> Some
             }
 
         [|
@@ -127,8 +83,8 @@ module EntryPoint =
                 Id = 101
                 Title = "Poids du corps 1 (new)"
                 Notes = "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-38"
-                Template = hiit
-                Settings = None
+                RepeatsAndTimings = hiit
+                ApplicationSettings = None
                 Exercises =
                     [|
                         "Squat foot touch"
@@ -142,8 +98,8 @@ module EntryPoint =
                 Id = 102
                 Title = "Poids du corps 4 (new)"
                 Notes = "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-49"
-                Template = { hiit with Cycles = 4 }
-                Settings = None
+                RepeatsAndTimings = { hiit with Cycles = 4 }
+                ApplicationSettings = None
                 Exercises =
                     [|
                         "Skater"
@@ -158,8 +114,8 @@ module EntryPoint =
                 Id = 103
                 Title = "Poids du corps 2 (old)"
                 Notes = "https://90daylc.thibaultgeoffray.com/mes-routines/phase-1/routine-12"
-                Template = hiit
-                Settings = None
+                RepeatsAndTimings = hiit
+                ApplicationSettings = None
                 Exercises =
                     [|
                         "Squats sautés"
@@ -173,35 +129,65 @@ module EntryPoint =
                 Id = 150
                 Title = "Course"
                 Notes = ""
-                Template =
-                    {
-                        Warmup = 7.<min> |%| 0.<sec>
-                        WarmupCycles = None
-                        Cycles = 15
-                        Work = 30.<sec>
-                        Rest = 30.<sec>
-                        Recovery = 30.<sec>
-                        CoolDown = Some(5.<min> |%| 0.<sec>)
-                    }
-                Settings = Some [| "key_workout_sound_cool_down", "value_sound_woohoo" |]
+                RepeatsAndTimings = hiitMachine
+                ApplicationSettings = Some [| "key_workout_sound_cool_down", "value_sound_woohoo" |]
                 Exercises = [| "Effort max" |] |> asEx
+            }
+            {
+                Id = 151
+                Title = "Vélo elliptique"
+                Notes = ""
+                RepeatsAndTimings =
+                    {
+                        Warmup = (7.<min> |%| 30.<sec>)
+                        WarmupCycles = None
+                        Cycles = 16
+                        Work = 30.<sec>
+                        Rest = None
+                        Recovery = None
+                        CoolDown = (5.<min> |%| 0.<sec>) |> Some
+                    }
+                ApplicationSettings = Some [| "key_workout_sound_cool_down", "value_sound_woohoo" |]
+                Exercises =
+                    [|
+                        "Elliptique (high)"
+                        "Elliptique (low)"
+                    |]
+                    |> asEx
+            }
+            {
+                Id = 152
+                Title = "Planche"
+                Notes = ""
+                RepeatsAndTimings =
+                    {
+                        Warmup = 10.<sec>
+                        WarmupCycles = None
+                        Cycles = 2
+                        Work = 60.<sec>
+                        Rest = 45.<sec> |> Some
+                        Recovery = 45.<sec> |> Some
+                        CoolDown = None
+                    }
+                ApplicationSettings = Some [| "key_workout_sound_cool_down", "value_sound_woohoo" |]
+                Exercises = [| "Hold" |] |> asEx
             }
             {
                 Id = 200
                 Title = "Vacuum"
                 Notes = ""
-                Settings =
+                ApplicationSettings =
                     Some [| ("key_workout_sound_time", "12")
                             ("key_workout_sound_latest_seconds", "value_sound_wood_2")
                             ("key_workout_sound_last_seconds_work", "value_sound_glass") |]
-                Template =
+                RepeatsAndTimings =
                     {
                         Warmup = 42.<sec>
                         WarmupCycles = None
                         Cycles = 6
                         Work = 30.<sec>
-                        Rest = 25.<sec>
-                        Recovery = 25.<sec>
+                        Rest = 25.<sec> |> Some
+                        Recovery = 25.<sec> |> Some
                         CoolDown = None
                     }
                 Exercises = [| "Hold" |] |> asEx
@@ -210,16 +196,16 @@ module EntryPoint =
                 Id = 300
                 Title = "Méditation"
                 Notes = ""
-                Settings = None
-                Template =
+                ApplicationSettings = None
+                RepeatsAndTimings =
                     {
                         Warmup = 10.<sec>
                         WarmupCycles = None
                         Cycles = 1
                         Work = (15.<min> |%| 30.<sec>)
-                        Rest = 10.<sec>
-                        Recovery = 10.<sec>
-                        CoolDown = Some(10.<sec>)
+                        Rest = 10.<sec> |> Some
+                        Recovery = 10.<sec> |> Some
+                        CoolDown = (10.<sec>) |> Some
                     }
                 Exercises = [| "~~~~" |] |> asEx
             }
