@@ -2,9 +2,12 @@
 
 open System
 open System.Collections.Generic
+open System.Security.Cryptography
 open Newtonsoft.Json
 open RepsTabataGenerator.Model
 open RepsTabataGenerator.WorkoutIntervalExpander
+open RepsTabataGenerator.Tools
+
 
 module OutputFileFormat =
 
@@ -76,9 +79,9 @@ module OutputFileFormat =
             versionName: string
         }
 
-    let asInt<[<Measure>]'u>(x: float<'u>): int = (int (ceiling( float x))) 
+    let asInt<[<Measure>] 'u> (x: float<'u>) : int = (int (ceiling (float x)))
 
-    let private intervalDuration duration intervalType (description: Option<Label>) =
+    let private intervalDuration duration intervalType (description: Label option) =
         {
             addSet = false
             bpm = 0
@@ -90,14 +93,11 @@ module OutputFileFormat =
             tabatasCount = -1
             time = duration |> asInt
             intervalType = intervalType
-            description =
-                match description with
-                | Some l -> l
-                | None -> null
+            description = description |> Option.toNull
             url = null
         }
 
-    let private intervalReps intervalType (bpm: BPM) (reps: Reps) description url =
+    let private intervalReps intervalType (bpm: BPM) (reps: Reps) (description: Label option) =
         {
             addSet = false
             bpm = bpm |> asInt
@@ -109,20 +109,22 @@ module OutputFileFormat =
             tabatasCount = -1
             time = 10
             intervalType = intervalType
-            description = description
-            url = url
+            description = description |> Option.toNull
+            url = null
         }
 
-    let private getIntervals (interval: DetailedInterval): Interval =
+    let private getIntervals (interval: DetailedInterval) : Interval =
         match interval with
         | DetailedInterval.Prepare d -> intervalDuration d 0 None
         | DetailedInterval.WorkDuration (label, duration) -> intervalDuration duration 1 (Some label)
-        | DetailedInterval.WorkReps (label, reps, bpm, gif) -> intervalReps 1 bpm reps label gif
+        | DetailedInterval.WorkReps (label, reps, bpm) -> intervalReps 1 bpm reps (Some label)
         | DetailedInterval.Rest d -> intervalDuration d 2 None
+        | DetailedInterval.RestReps (reps, bpm) -> intervalReps 2 bpm reps None
         | DetailedInterval.Recovery d -> intervalDuration d 3 None
+        | DetailedInterval.RecoveryReps (reps, bpm) -> intervalReps 3 bpm reps None
         | DetailedInterval.CoolDown d -> intervalDuration d 4 None
 
-    let private getWorkout (workout: DetailedWorkout): Workout =
+    let private getWorkout (workout: DetailedWorkout) : Workout =
         {
             colorId = 2
             coolDown = 0
@@ -161,9 +163,14 @@ module OutputFileFormat =
         inherit JsonConverter()
         override _.CanConvert(t) = t = typeof<Interval>
         override _.ReadJson(_, _, _, _) = raise (NotImplementedException())
+
         override _.WriteJson(writer, value, _) =
-            let settings = JsonSerializerSettings(Formatting = Formatting.None)
-            let rawValue = JsonConvert.SerializeObject(value, settings)
+            let settings =
+                JsonSerializerSettings(Formatting = Formatting.None)
+
+            let rawValue =
+                JsonConvert.SerializeObject(value, settings)
+
             writer.WriteRawValue rawValue
 
     let createResult (workouts: DetailedWorkout array) =

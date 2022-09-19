@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="paket.references" />
+    <Compile Include="Tools.fs" />
     <Compile Include="Model.fs" />
     <Compile Include="Configuration.fs" />
     <Compile Include="WorkoutIntervalExpander.fs" />

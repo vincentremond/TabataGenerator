@@ -19,20 +19,18 @@ module EntryPoint =
 
         let exercises =
             [|
-                ExerciseWithReps.mk "Bear plank" 42.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Break dancer" 23.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Burpees" 13.<reps/min> "https://pas-bien.net/divers/tabata/burpees.gif"
-                ExerciseWithReps.mk "Jumping jack" 125.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Montées de genoux" 140.<reps/min> "https://pas-bien.net/divers/tabata/montees-genoux.gif"
-                ExerciseWithReps.mk "Mountain climbers" 100.<reps/min> "https://pas-bien.net/divers/tabata/montain-climbers.gif"
-                ExerciseWithReps.mk "Pompes en T" 13.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Skater" 40.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Squat foot touch" 23.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Squats sautés" 40.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Step up" 30.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Coude genoux" 30.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Elliptique (high)" 110.<reps/min> defaultSpinnerGif
-                ExerciseWithReps.mk "Elliptique (low)" 90.<reps/min> defaultSpinnerGif
+                ExerciseWithReps.mk "Bear plank" 42.<reps/min>
+                ExerciseWithReps.mk "Break dancer" 23.<reps/min>
+                ExerciseWithReps.mk "Burpees" 13.<reps/min>
+                ExerciseWithReps.mk "Jumping jack" 125.<reps/min>
+                ExerciseWithReps.mk "Montées de genoux" 140.<reps/min>
+                ExerciseWithReps.mk "Mountain climbers" 100.<reps/min>
+                ExerciseWithReps.mk "Pompes en T" 13.<reps/min>
+                ExerciseWithReps.mk "Skater" 40.<reps/min>
+                ExerciseWithReps.mk "Squat foot touch" 23.<reps/min>
+                ExerciseWithReps.mk "Squats sautés" 40.<reps/min>
+                ExerciseWithReps.mk "Step up" 30.<reps/min>
+                ExerciseWithReps.mk "Coude genoux" 30.<reps/min>
             |]
 
         let asEx input =
@@ -54,6 +52,7 @@ module EntryPoint =
                 Rest = 30.<sec> |> Some
                 Recovery = 30.<sec> |> Some
                 CoolDown = 30.<sec> |> Some
+                Pace = None
             }
 
         let hiit =
@@ -65,6 +64,7 @@ module EntryPoint =
                 Rest = 35.<sec> |> Some
                 Recovery = 35.<sec> |> Some
                 CoolDown = (3.<min> |%| 0.<sec>) |> Some
+                Pace = None
             }
 
         let circuitTraining =
@@ -76,6 +76,7 @@ module EntryPoint =
                 Rest = 4.<sec> |> Some
                 Recovery = (1.<min> |%| 15.<sec>) |> Some
                 CoolDown = (3.<min> |%| 0.<sec>) |> Some
+                Pace = None
             }
 
         [|
@@ -146,14 +147,16 @@ module EntryPoint =
                         Rest = None
                         Recovery = None
                         CoolDown = (5.<min> |%| 0.<sec>) |> Some
+                        Pace =
+                            Some {
+                                Work = 110.<reps/min>
+                                Rest = 90.<reps/min>
+                            }
                     }
-                ApplicationSettings = Some [| "key_workout_sound_cool_down", "value_sound_woohoo" |]
-                Exercises =
-                    [|
-                        "Elliptique (high)"
-                        "Elliptique (low)"
-                    |]
-                    |> asEx
+                ApplicationSettings =
+                    Some [| "key_workout_sound_cool_down", "value_sound_woohoo"
+                            "key_workout_sound_metronome_volume_percent", "60" |]
+                Exercises = [| "Work" |] |> asEx
             }
             {
                 Id = 152
@@ -168,6 +171,7 @@ module EntryPoint =
                         Rest = 45.<sec> |> Some
                         Recovery = 45.<sec> |> Some
                         CoolDown = None
+                        Pace = None
                     }
                 ApplicationSettings = Some [| "key_workout_sound_cool_down", "value_sound_woohoo" |]
                 Exercises = [| "Hold" |] |> asEx
@@ -189,6 +193,7 @@ module EntryPoint =
                         Rest = 25.<sec> |> Some
                         Recovery = 25.<sec> |> Some
                         CoolDown = None
+                        Pace = None
                     }
                 Exercises = [| "Hold" |] |> asEx
             }
@@ -205,7 +210,8 @@ module EntryPoint =
                         Work = (15.<min> |%| 30.<sec>)
                         Rest = 10.<sec> |> Some
                         Recovery = 10.<sec> |> Some
-                        CoolDown = (10.<sec>) |> Some
+                        CoolDown = 10.<sec> |> Some
+                        Pace = None
                     }
                 Exercises = [| "~~~~" |] |> asEx
             }
