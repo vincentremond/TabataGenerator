@@ -21,6 +21,7 @@ let Test1 () =
                 CoolDown = 300.<sec> |> Some
                 WarmupCycles = Some 2
                 Cycles = 3
+                Pace = None
             }
         ApplicationSettings = None
         Exercises =
@@ -42,23 +43,23 @@ let Test1 () =
                     DetailedInterval.Prepare(15.<sec>)
                     DetailedInterval.WorkDuration("Warmup\n[Ex. 1/2 • Cycle 1/2+3]\nEx1", 30.<sec>)
                     DetailedInterval.Rest(5.<sec>)
-                    DetailedInterval.WorkReps("Warmup\n[Ex. 2/2 • Cycle 1/2+3]\nEx2", 72.<reps>, 144.<reps/min>, "https://ex2.gif")
+                    DetailedInterval.WorkReps("Warmup\n[Ex. 2/2 • Cycle 1/2+3]\nEx2", 72.<reps>, 144.<reps/min>)
                     DetailedInterval.Recovery(60.<sec>)
                     DetailedInterval.WorkDuration("Warmup\n[Ex. 1/2 • Cycle 2/2+3]\nEx1", 30.<sec>)
                     DetailedInterval.Rest(5.<sec>)
-                    DetailedInterval.WorkReps("Warmup\n[Ex. 2/2 • Cycle 2/2+3]\nEx2", 72.<reps>, 144.<reps/min>, "https://ex2.gif")
+                    DetailedInterval.WorkReps("Warmup\n[Ex. 2/2 • Cycle 2/2+3]\nEx2", 72.<reps>, 144.<reps/min>)
                     DetailedInterval.Recovery(60.<sec>)
                     DetailedInterval.WorkDuration("\n[Ex. 1/2 • Cycle 1/3]\nEx1", 30.<sec>)
                     DetailedInterval.Rest(5.<sec>)
-                    DetailedInterval.WorkReps("\n[Ex. 2/2 • Cycle 1/3]\nEx2", 90.<reps>, 180.<reps/min>, "https://ex2.gif")
+                    DetailedInterval.WorkReps("\n[Ex. 2/2 • Cycle 1/3]\nEx2", 90.<reps>, 180.<reps/min>)
                     DetailedInterval.Recovery(60.<sec>)
                     DetailedInterval.WorkDuration("\n[Ex. 1/2 • Cycle 2/3]\nEx1", 30.<sec>)
                     DetailedInterval.Rest(5.<sec>)
-                    DetailedInterval.WorkReps("\n[Ex. 2/2 • Cycle 2/3]\nEx2", 90.<reps>, 180.<reps/min>, "https://ex2.gif")
+                    DetailedInterval.WorkReps("\n[Ex. 2/2 • Cycle 2/3]\nEx2", 90.<reps>, 180.<reps/min>)
                     DetailedInterval.Recovery(60.<sec>)
                     DetailedInterval.WorkDuration("\n[Ex. 1/2 • Cycle 3/3]\nEx1", 30.<sec>)
                     DetailedInterval.Rest(5.<sec>)
-                    DetailedInterval.WorkReps("\n[Ex. 2/2 • Cycle 3/3]\nEx2", 90.<reps>, 180.<reps/min>, "https://ex2.gif")
+                    DetailedInterval.WorkReps("\n[Ex. 2/2 • Cycle 3/3]\nEx2", 90.<reps>, 180.<reps/min>)
                     DetailedInterval.CoolDown(300.<sec>)
                 |]
         }

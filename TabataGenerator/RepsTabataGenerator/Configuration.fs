@@ -13,15 +13,15 @@ module Configuration =
             Rest: Duration option
             Recovery: Duration option
             CoolDown: Duration option
+            Pace: Pace option
         }
 
     type ExerciseWithReps =
         {
             Name: Label
             BPM: BPM
-            GIF: GIF
         }
-        static member mk l b g = { Name = l; BPM = b; GIF = g }
+        static member mk l b = { Name = l; BPM = b }
 
 
     type Exercise =

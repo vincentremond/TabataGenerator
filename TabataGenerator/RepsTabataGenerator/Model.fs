@@ -21,7 +21,11 @@ let ceiling<[<Measure>]'u>(x: float<'u>): float<'u> = Math.Ceiling(float x) |> F
 type Reps = float<reps>
 type Label = string
 type TemplateId = string
-type GIF = string
 type BPM = float<reps/min>
 
 type Settings = (string * string) array option
+
+type Pace = {
+    Work: BPM
+    Rest: BPM
+}

@@ -9,9 +9,11 @@ module WorkoutIntervalExpander =
     type DetailedInterval =
         | Prepare of Duration
         | WorkDuration of Label * Duration
-        | WorkReps of Label * Reps * BPM * GIF
+        | WorkReps of Label * Reps * BPM
         | Rest of Duration
+        | RestReps of Reps * BPM
         | Recovery of Duration
+        | RecoveryReps of Reps * BPM
         | CoolDown of Duration
 
     type DetailedWorkout =
@@ -27,8 +29,8 @@ module WorkoutIntervalExpander =
         bpm * (secondsToMinutes duration) * bpmAdjust
         |> ceiling
 
-    let createRepsInterval label (bpm: BPM) gif duration bpmAdjust =
-        DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), (bpm * bpmAdjust), gif)
+    let createRepsInterval label (bpm: BPM) duration bpmAdjust =
+        DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), (bpm * bpmAdjust))
 
     let createLabel (pre: string) (exi: int) (exc: int) (cyi: int) (cyc: int) (acy: int option) (lab: string) : string =
         let cycle i c a =
@@ -51,13 +53,13 @@ module WorkoutIntervalExpander =
 
         match ex with
         | ExerciseDuration l -> DetailedInterval.WorkDuration((createLabel' l), d)
-        | ExerciseReps e -> createRepsInterval (createLabel' e.Name) e.BPM e.GIF d bpmAdjust
+        | ExerciseReps e -> createRepsInterval (createLabel' e.Name) e.BPM d bpmAdjust
 
     let mapi (arr: Exercise array) =
         let mapi' index item = ((index + 1), item)
         arr |> Array.mapi mapi'
 
-    let postExerciseInterval warmup exi exc cyi cyc r =
+    let postExerciseInterval warmup exi exc cyi cyc (r:RepeatsAndTimings) =
         let lastCycle = cyi = cyc
         let lastExercise = exi = exc
 
