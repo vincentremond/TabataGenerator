@@ -16,18 +16,16 @@ module WorkoutIntervalExpander =
         | RecoveryReps of Reps * BPM
         | CoolDown of Duration
 
-    type DetailedWorkout =
-        {
-            Id: int
-            Title: Label
-            Notes: string
-            Intervals: DetailedInterval array
-            Settings: Settings
-        }
+    type DetailedWorkout = {
+        Id: int
+        Title: Label
+        Notes: string
+        Intervals: DetailedInterval array
+        Settings: Settings
+    }
 
     let getRepsCount (bpm: BPM) (duration: Duration) (bpmAdjust: float) : Reps =
-        bpm * (secondsToMinutes duration) * bpmAdjust
-        |> ceiling
+        bpm * (secondsToMinutes duration) * bpmAdjust |> ceiling
 
     let createRepsInterval label (bpm: BPM) duration bpmAdjust =
         DetailedInterval.WorkReps(label, (getRepsCount bpm duration bpmAdjust), (bpm * bpmAdjust))
@@ -59,7 +57,7 @@ module WorkoutIntervalExpander =
         let mapi' index item = ((index + 1), item)
         arr |> Array.mapi mapi'
 
-    let postExerciseInterval warmup exi exc cyi cyc (r:RepeatsAndTimings) =
+    let postExerciseInterval warmup exi exc cyi cyc (r: RepeatsAndTimings) =
         let lastCycle = cyi = cyc
         let lastExercise = exi = exc
 
@@ -121,18 +119,12 @@ module WorkoutIntervalExpander =
 
         description.Notes
         + "\n\nExercises:\n"
-        + (String.Join(
-            "\n",
-            description.Exercises
-            |> Seq.map getExLabel
-            |> Seq.map (fun l -> $"• {l}")
-        ))
+        + (String.Join("\n", description.Exercises |> Seq.map getExLabel |> Seq.map (fun l -> $"• {l}")))
 
-    let create (description: Workout) : DetailedWorkout =
-        {
-            Id = description.Id
-            Title = description.Title
-            Notes = (getNotes description)
-            Intervals = (createIntervals description)
-            Settings = description.ApplicationSettings
-        }
+    let create (description: Workout) : DetailedWorkout = {
+        Id = description.Id
+        Title = description.Title
+        Notes = (getNotes description)
+        Intervals = (createIntervals description)
+        Settings = description.ApplicationSettings
+    }

@@ -1,0 +1,11 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+
+nuget FSharp.Data
+nuget Newtonsoft.Json
+
+nuget NUnit
+nuget NUnit3TestAdapter
+nuget FsUnit
+nuget Microsoft.NET.Test.Sdk

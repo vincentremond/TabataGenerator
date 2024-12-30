@@ -2,10 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{3B98DC79-7354-47DF-86DB-81B01E192BB8}"
 ProjectSection(SolutionItems) = preProject
-	..\exercises.yml = ..\exercises.yml
-	..\.gitignore = ..\.gitignore
-	..\README.md = ..\README.md
+	exercises.yml = exercises.yml
+	.gitignore = .gitignore
+	README.md = README.md
 	paket.dependencies = paket.dependencies
+	paket.lock = paket.lock
 EndProjectSection
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RepsTabataGenerator", "RepsTabataGenerator\RepsTabataGenerator.fsproj", "{C3F2C398-C3D5-4D65-9AD6-3502D6EE5061}"
