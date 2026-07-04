@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/.global/">
+    <File Path=".gitignore" />
+    <File Path="exercises.yml" />
+    <File Path="paket.dependencies" />
+    <File Path="paket.lock" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="RepsTabataGenerator.Tests/RepsTabataGenerator.Tests.fsproj" />
+  <Project Path="RepsTabataGenerator/RepsTabataGenerator.fsproj" />
+  <Project Path="TabataGenerator.JsonModels/TabataGenerator.JsonModels.csproj" />
+  <Project Path="TabataGenerator/TabataGenerator.fsproj" />
+</Solution>
